@@ -1,2 +1,4 @@
-package com.kodilla.ecommercee.domain;public class Product {
+package com.kodilla.ecommercee.domain;
+
+public class Product {
 }
