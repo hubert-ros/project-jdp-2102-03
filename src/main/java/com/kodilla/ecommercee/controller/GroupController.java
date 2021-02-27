@@ -1,9 +1,10 @@
 package com.kodilla.ecommercee.controller;
 
-import com.kodilla.ecommercee.domain.dto.GroupDto;
+import com.kodilla.ecommercee.domain.GenericEntity;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 @RestController
@@ -11,21 +12,22 @@ import java.util.List;
 public class GroupController {
 
     @GetMapping(value = "getGroups")
-    public List<GroupDto> getGroups() {
-        return new ArrayList<>();
+    public List<GenericEntity> getGroups() {
+        return Collections.singletonList(new GenericEntity("taborety, mydło, powidło"));
     }
 
-    @PostMapping(value = "createGroup")
-    public void createGroup(GroupDto groupDto) {
+    @PostMapping(value = "createGroup", consumes = MediaType.APPLICATION_JSON_VALUE)
+    public GenericEntity createGroup(@RequestBody GenericEntity genericEntity) {
+        return new GenericEntity("created group:  lavender soap");
     }
 
     @GetMapping(value = "getGroup")
-    public GroupDto getGroup(Long groupId) {
-        return new GroupDto();
+    public GenericEntity getGroup(Long groupId) {
+        return new GenericEntity("get one group");
     }
 
-    @PutMapping(value = "updateGroup")
-    public GroupDto updateGroup(GroupDto groupDto) {
-        return new GroupDto();
+    @PutMapping(value = "updateGroup", consumes = MediaType.APPLICATION_JSON_VALUE)
+    public GenericEntity updateGroup(@RequestBody GenericEntity genericEntity) {
+        return new GenericEntity("updated group: soap");
     }
 }
