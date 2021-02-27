@@ -1,6 +1,7 @@
 package com.kodilla.ecommercee.controller;
 
 import com.kodilla.ecommercee.domain.ProductDto;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -13,27 +14,27 @@ import java.util.List;
 public class ProductController {
 
     @RequestMapping(method = RequestMethod.GET, value = "getProducts")
-    public List<ProductDto> getProducts() {
+    public List<GenericEntity> getProducts() {
         return new ArrayList<>();
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "getProduct")
-    public ProductDto getProduct(Long id) {
-        return new ProductDto();
+    public GenericEntity getProduct(@PathVariable Long id) {
+        return new GenericEntity("1");
     }
 
     @RequestMapping(method = RequestMethod.POST, value = "createProduct")
-    public ProductDto createProduct() {
-        return new ProductDto();
+    public GenericEntity createProduct() {
+        return new GenericEntity("2");
     }
 
     @RequestMapping(method = RequestMethod.PUT, value = "updateProduct")
-    public ProductDto updateProduct(ProductDto productDto) {
-        return new ProductDto();
+    public GenericEntity updateProduct(ProductDto productDto) {
+        return new GenericEntity("3");
     }
 
     @RequestMapping(method = RequestMethod.DELETE, value = "deleteProduct")
-    public void deleteProduct(Long id) {
+    public void deleteProduct(@PathVariable Long id) {
 
     }
 
