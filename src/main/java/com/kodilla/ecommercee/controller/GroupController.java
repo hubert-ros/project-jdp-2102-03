@@ -21,7 +21,7 @@ public class GroupController {
     }
 
     @GetMapping(value = "getGroup")
-    public GenericEntity getGroup(@RequestParam long id) {
+    public GenericEntity getGroup(@PathVariable Long id) {
         return new GenericEntity("get one group");
     }
 
