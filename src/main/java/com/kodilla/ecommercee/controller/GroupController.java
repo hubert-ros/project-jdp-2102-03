@@ -28,6 +28,6 @@ public class GroupController {
 
     @PutMapping(value = "updateGroup", consumes = MediaType.APPLICATION_JSON_VALUE)
     public GenericEntity updateGroup(@RequestBody GenericEntity genericEntity) {
-        return new GenericEntity("updated group: soap");
+        return new GenericEntity("updated group: liquid soap");
     }
 }
