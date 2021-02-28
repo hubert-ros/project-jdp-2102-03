@@ -26,10 +26,14 @@ repositories {
 
 dependencies {
     implementation 'org.projectlombok:lombok:1.18.16'
-    testImplementation group: 'junit', name: 'junit', version: '4.13.2'
-    compile ('mysql:mysql-connector-java')
+
+    implementation 'junit:junit:4.13.2'
+    implementation 'org.junit.jupiter:junit-jupiter:5.4.2'
+
+    runtimeOnly('com.h2database:h2')
+    compile('mysql:mysql-connector-java')
+
     implementation('org.springframework.boot:spring-boot-starter-data-jpa')
     implementation('org.springframework.boot:spring-boot-starter-web')
-    runtimeOnly('com.h2database:h2')
-    testImplementation('org.springframework.boot:spring-boot-starter-test')
+    implementation('org.springframework.boot:spring-boot-starter-test')
 }

@@ -27,6 +27,6 @@ public class GroupController {
 
     @PutMapping(value = "updateGroup")
     public GenericEntity updateGroup(GenericEntity genericEntity) {
-        return new GenericEntity("updated group: liquid soap");
+        return new GenericEntity("updated group: Liquid Soap");
     }
 }
