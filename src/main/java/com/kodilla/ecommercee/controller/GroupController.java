@@ -1,6 +1,6 @@
 package com.kodilla.ecommercee.controller;
 
-import com.kodilla.ecommercee.domain.GenericEntity;
+import com.kodilla.ecommercee.GenericEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Collections;
