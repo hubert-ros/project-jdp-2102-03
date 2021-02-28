@@ -26,7 +26,7 @@ public class CartController {
         return new GenericEntity();
     }
 
-    @PutMapping(value = "deleteProduct")
+    @DeleteMapping(value = "deleteProduct")
     public GenericEntity deleteProductFromCart(@PathVariable Long cartId, @PathVariable Long productId) {
         return new GenericEntity();
     }
