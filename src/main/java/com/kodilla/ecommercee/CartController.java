@@ -11,29 +11,37 @@ import java.util.List;
 @RequestMapping("/v1/cart")
 public class CartController {
 
-@GetMapping(value = "getCarts")
-    public List<CartDto> getCarts() {
-    return new ArrayList<>();
-}
+    @PostMapping(value = "createNewCart")
+    public GenericEntity createNewCart() {
+        return new GenericEntity("newCartDto");
+    }
 
-@GetMapping(value = "getCart")
-    public CartDto getCart(Long cartId) {
-    return new CartDto();
-}
+    @GetMapping(value = "getProducts")
+    public List<GenericEntity> getProductsFromCart (@PathVariable Long cartId) {
+        return new ArrayList<>();
+    }
+
+    @PutMapping(value = "addProduct")
+    public GenericEntity addProductToCart(@PathVariable Long cartId, GenericEntity productDto) {
+        return new GenericEntity();
+    }
+
+    @PutMapping(value = "deleteProduct")
+    public GenericEntity deleteProductFromCart(@PathVariable Long cartId, @PathVariable Long productId) {
+        return new GenericEntity();
+    }
+
+    @PostMapping(value = "createOrder")
+    public GenericEntity createOrder(GenericEntity cartDto) {
+        return new GenericEntity();
+    }
+
+    @GetMapping(value = "getCart")
+        public GenericEntity getCart(@PathVariable Long cartId) {
+        return new GenericEntity();
+    }
 
     @DeleteMapping(value = "deleteCart")
-    public void deleteCart(Long cartId) {
-
+    public void deleteCart(@PathVariable Long cartId) {
     }
-
-    @PutMapping(value = "updateCart")
-    public CartDto updateCart(CartDto cartDto) {
-        return new CartDto();
-    }
-
-    @PostMapping(value = "createCart")
-    public void createCart(CartDto cartDto) {
-
-    }
-
 }
