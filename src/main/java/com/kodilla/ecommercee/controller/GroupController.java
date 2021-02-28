@@ -17,7 +17,7 @@ public class GroupController {
 
     @PostMapping(value = "createGroup")
     public GenericEntity createGroup(GenericEntity genericEntity) {
-        return new GenericEntity("created group:  Lavender soap");
+        return new GenericEntity("created group: Lavender soap");
     }
 
     @GetMapping(value = "getGroup")
