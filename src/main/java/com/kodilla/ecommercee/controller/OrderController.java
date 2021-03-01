@@ -1,6 +1,7 @@
 package com.kodilla.ecommercee.controller;
 
 import com.kodilla.ecommercee.domain.GenericEntity;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -18,11 +19,11 @@ public class OrderController {
     }
 
     @RequestMapping(method = RequestMethod.POST, value = "createOrder")
-    public void createOrder() {
+    public void createOrder(GenericEntity genericEntity) {
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "getOrder")
-    public GenericEntity getOrder(Long id) {
+    public GenericEntity getOrder(@PathVariable Long id) {
         return new GenericEntity("2");
     }
 
@@ -32,7 +33,7 @@ public class OrderController {
     }
 
     @RequestMapping(method = RequestMethod.DELETE, value = "deleteOrder")
-    public void deleteOrder(Long orderId) {
+    public void deleteOrder(@PathVariable Long orderId) {
 
     }
 
