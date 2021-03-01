@@ -30,4 +30,5 @@ public class SpringBootJPAIntegrationTest {
         assertTrue(foundEntity.isPresent());
         assertEquals(genericEntity.getValue(), foundEntity.get().getValue());
     }
+
 }
