@@ -1,6 +1,6 @@
-package com.kodilla.ecommercee;
+package com.kodilla.ecommercee.controller;
 
-import com.kodilla.ecommercee.domain.ProductDto;
+import com.kodilla.ecommercee.domain.GenericEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -29,7 +29,7 @@ public class ProductController {
     }
 
     @RequestMapping(method = RequestMethod.PUT, value = "updateProduct")
-    public GenericEntity updateProduct(ProductDto productDto) {
+    public GenericEntity updateProduct(GenericEntity genericEntity) {
         return new GenericEntity("3");
     }
 
