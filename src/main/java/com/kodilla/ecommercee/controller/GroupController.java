@@ -22,7 +22,7 @@ public class GroupController {
     }
 
     @GetMapping(value = "getGroup")
-    public GenericEntity getGroup(@PathVariable long id) {
+    public GenericEntity getGroup(long id) {
         return new GenericEntity("2");
     }
 
