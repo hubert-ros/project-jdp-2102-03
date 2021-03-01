@@ -11,23 +11,23 @@ import java.util.List;
 @RequestMapping("/v1/cart")
 public class CartController {
 
-    @PostMapping(value = "createNewCart")
-    public GenericEntity createNewCart() {
-        return new GenericEntity("newCartDto");
+    @PostMapping(value = "createCart")
+    public GenericEntity createCart() {
+        return new GenericEntity("CartDto");
     }
 
     @GetMapping(value = "getProducts")
-    public List<GenericEntity> getProductsFromCart (@PathVariable Long cartId) {
+    public List<GenericEntity> getProductsFromCart (Long cartId) {
         return new ArrayList<>();
     }
 
     @PutMapping(value = "addProduct")
-    public GenericEntity addProductToCart(@PathVariable Long cartId, GenericEntity productDto) {
+    public GenericEntity addProductToCart(Long cartId, GenericEntity productDto) {
         return new GenericEntity();
     }
 
     @DeleteMapping(value = "deleteProduct")
-    public GenericEntity deleteProductFromCart(@PathVariable Long cartId, @PathVariable Long productId) {
+    public GenericEntity deleteProductFromCart(Long cartId, Long productId) {
         return new GenericEntity();
     }
 
@@ -36,12 +36,7 @@ public class CartController {
         return new GenericEntity();
     }
 
-    @GetMapping(value = "getCart")
-        public GenericEntity getCart(@PathVariable Long cartId) {
-        return new GenericEntity();
-    }
-
     @DeleteMapping(value = "deleteCart")
-    public void deleteCart(@PathVariable Long cartId) {
+    public void deleteCart(Long cartId) {
     }
 }
