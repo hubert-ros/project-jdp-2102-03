@@ -1,8 +1,9 @@
 package com.kodilla.ecommercee.controller;
 
-import com.kodilla.ecommercee.GenericEntity;
+import com.kodilla.ecommercee.domain.GenericEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -12,21 +13,21 @@ public class GroupController {
 
     @GetMapping(value = "getGroups")
     public List<GenericEntity> getGroups() {
-        return Collections.singletonList(new GenericEntity("taborety, mydło, powidło"));
+        return  new ArrayList<>();
     }
 
     @PostMapping(value = "createGroup")
     public GenericEntity createGroup(GenericEntity genericEntity) {
-        return new GenericEntity("created group: Lavender Soap");
+        return new GenericEntity("1");
     }
 
     @GetMapping(value = "getGroup")
-    public GenericEntity getGroup(@RequestParam long id) {
-        return new GenericEntity("get one group");
+    public GenericEntity getGroup(@PathVariable long id) {
+        return new GenericEntity("2");
     }
 
     @PutMapping(value = "updateGroup")
     public GenericEntity updateGroup(GenericEntity genericEntity) {
-        return new GenericEntity("updated group: Liquid Soap");
+        return new GenericEntity("3");
     }
 }
