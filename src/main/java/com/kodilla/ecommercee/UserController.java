@@ -20,7 +20,7 @@ public class UserController {
     }
 
     @PostMapping(value = "createUserKey")
-    public GenericEntity createUserKey(String userName, String userKey) {
-        return new GenericEntity("user_key");
+    public String createUserKey(String userName, String userKey) {
+        return "user_key";
     }
 }
