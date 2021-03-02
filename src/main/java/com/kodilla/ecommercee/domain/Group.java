@@ -1,4 +1,3 @@
 package com.kodilla.ecommercee.domain;
 
-public class Group {
-}
+public class Group {}

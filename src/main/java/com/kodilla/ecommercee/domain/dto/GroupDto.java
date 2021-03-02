@@ -1,4 +1,3 @@
 package com.kodilla.ecommercee.domain.dto;
 
-public class GroupDto {
-}
+public class GroupDto {}
