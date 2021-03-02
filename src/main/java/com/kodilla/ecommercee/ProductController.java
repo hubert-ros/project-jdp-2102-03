@@ -1,6 +1,5 @@
-package com.kodilla.ecommercee.controller;
+package com.kodilla.ecommercee;
 
-import com.kodilla.ecommercee.domain.GenericEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;

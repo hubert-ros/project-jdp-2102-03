@@ -1,6 +1,5 @@
 package com.kodilla.ecommercee;
 
-import com.kodilla.ecommercee.domain.GenericEntity;
 import com.kodilla.ecommercee.repository.GenericEntityRepository;
 import org.junit.Test;
 import org.junit.runner.RunWith;
