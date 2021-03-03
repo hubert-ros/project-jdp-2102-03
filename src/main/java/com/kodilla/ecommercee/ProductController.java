@@ -1,10 +1,6 @@
 package com.kodilla.ecommercee;
 
-import com.kodilla.ecommercee.domain.ProductDto;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,28 +9,28 @@ import java.util.List;
 @RequestMapping("/v1/product")
 public class ProductController {
 
-    @RequestMapping(method = RequestMethod.GET, value = "getProducts")
+    @GetMapping(value = "getProducts")
     public List<GenericEntity> getProducts() {
         return new ArrayList<>();
     }
 
-    @RequestMapping(method = RequestMethod.GET, value = "getProduct")
-    public GenericEntity getProduct(@PathVariable Long id) {
+    @GetMapping(value = "getProduct")
+    public GenericEntity getProduct(Long id) {
         return new GenericEntity("1");
     }
 
-    @RequestMapping(method = RequestMethod.POST, value = "createProduct")
+    @PostMapping(value = "createProduct")
     public GenericEntity createProduct() {
         return new GenericEntity("2");
     }
 
-    @RequestMapping(method = RequestMethod.PUT, value = "updateProduct")
-    public GenericEntity updateProduct(ProductDto productDto) {
+    @PutMapping(value = "updateProduct")
+    public GenericEntity updateProduct(GenericEntity genericEntity) {
         return new GenericEntity("3");
     }
 
     @RequestMapping(method = RequestMethod.DELETE, value = "deleteProduct")
-    public void deleteProduct(@PathVariable Long id) {
+    public void deleteProduct(Long id) {
 
     }
 
