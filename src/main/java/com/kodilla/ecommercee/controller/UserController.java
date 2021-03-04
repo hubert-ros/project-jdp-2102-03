@@ -16,7 +16,7 @@ public class UserController {
     }
 
     @PutMapping(value = "blockedUser")
-    public GenericEntity blockedUser(Long userId) {
+    public GenericEntity blockUser(Long userId) {
         return new GenericEntity("user_blocked");
     }
 
