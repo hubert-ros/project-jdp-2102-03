@@ -16,6 +16,7 @@ public class Product {
 
     @Id
     @GeneratedValue
+    @Column(name = "ID")
     private Long ID;
 
     @ManyToOne

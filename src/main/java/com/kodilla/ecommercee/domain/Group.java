@@ -17,9 +17,10 @@ public class Group {
 
     @Id
     @GeneratedValue
+    @Column(name = "ID")
     private Long id;
 
-    @Column
+    @Column(name = "NAME")
     private String name;
 
     @OneToMany(
