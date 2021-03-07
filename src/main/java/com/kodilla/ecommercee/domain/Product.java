@@ -6,6 +6,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity(name = "ENTITY_PRODUCT")
 @NoArgsConstructor
@@ -15,11 +17,9 @@ import javax.persistence.*;
 public class Product {
 
     @Id
-    @GeneratedValue
-    @Column(name = "ID")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long ID;
 
-    @ManyToOne
-    @JoinColumn(name = "GROUP_ID")
-    private Group groupOfProduct;
+    @ManyToMany(mappedBy = "products")
+    private Set<Group> groupsOfProduct = new HashSet<>();
 }
