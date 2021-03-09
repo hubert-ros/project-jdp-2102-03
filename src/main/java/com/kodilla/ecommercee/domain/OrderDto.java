@@ -7,10 +7,7 @@ import lombok.NoArgsConstructor;
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
-public class UserDto {
+public class OrderDto {
     private Long id;
-    private String username;
-    private String password;
-    private String e_mail;
-    private String address;
+    private User user;
 }
