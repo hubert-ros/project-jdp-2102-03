@@ -1,6 +1,7 @@
 package com.kodilla.ecommercee.domain;
 
 import lombok.AllArgsConstructor;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
@@ -9,6 +10,7 @@ import javax.persistence.*;
 @Table(name = "ORDERS")
 @AllArgsConstructor
 @NoArgsConstructor
+@Getter
 public class Order {
 
     @Id

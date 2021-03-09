@@ -1,6 +1,7 @@
 package com.kodilla.ecommercee.domain;
 
 import lombok.AllArgsConstructor;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
@@ -12,16 +13,15 @@ import java.util.Set;
 @Table(name = "USERS")
 @AllArgsConstructor
 @NoArgsConstructor
+@Getter
 public class User {
     @Id
     @GeneratedValue
+    @Column(name = "user_id")
     private Long id;
 
     @NotNull
-    private String username;
-
-    @NotNull
-    private String password;
+    private String name;
 
     @NotNull
     private String e_mail;
