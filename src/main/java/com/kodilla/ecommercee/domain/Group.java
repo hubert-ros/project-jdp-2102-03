@@ -31,15 +31,4 @@ public class Group {
             joinColumns = @JoinColumn(name = "GROUP_ID"),
             inverseJoinColumns = @JoinColumn(name = "PRODUCT_ID"))
     private Set<Product> products  = new HashSet<>();
-
-
-    public void addProduct(Product product) {
-        this.products.add(product);
-        product.getGroupsOfProduct().add(this);
-    }
-
-    public void removeProduct(Product product) {
-        this.products.remove(product);
-        product.getGroupsOfProduct().remove(this);
-    }
 }
