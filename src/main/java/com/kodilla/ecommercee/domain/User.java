@@ -21,5 +21,4 @@ public class User {
             fetch = FetchType.EAGER,
             cascade = CascadeType.ALL)
     private final Set<Order> orders = new HashSet<>();
-
 }

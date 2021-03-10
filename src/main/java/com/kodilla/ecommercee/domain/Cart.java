@@ -11,7 +11,6 @@ import javax.persistence.*;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Cart {
-
     @Id
     @GeneratedValue
     @Column(name = "cart_id")
@@ -21,5 +20,4 @@ public class Cart {
     @OneToOne
     @JoinColumn(name = "order_id")
     private Cart cart;
-
 }
