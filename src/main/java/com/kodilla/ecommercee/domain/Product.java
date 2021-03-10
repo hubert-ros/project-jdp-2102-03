@@ -9,7 +9,8 @@ import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
 
-@Entity(name = "PRODUCT")
+@Entity
+@Table(name = "PRODUCT")
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter

@@ -10,9 +10,10 @@ import javax.validation.constraints.NotNull;
 import java.util.HashSet;
 import java.util.Set;
 
-@Entity(name = "GROUP_TABLE")
-@NoArgsConstructor
+@Entity
+@Table(name = "GROUPS_TABLE")
 @AllArgsConstructor
+@NoArgsConstructor
 @Getter
 @Setter
 public class Group {
