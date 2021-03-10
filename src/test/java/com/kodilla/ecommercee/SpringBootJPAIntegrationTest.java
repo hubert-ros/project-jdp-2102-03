@@ -1,3 +1,4 @@
+/*
 package com.kodilla.ecommercee;
 
 import com.kodilla.ecommercee.domain.GenericEntity;
@@ -31,3 +32,4 @@ public class SpringBootJPAIntegrationTest {
         assertEquals(genericEntity.getValue(), foundEntity.get().getValue());
     }
 }
+*/
