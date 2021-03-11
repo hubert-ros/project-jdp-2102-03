@@ -24,13 +24,7 @@ public class Product {
     @NotNull
     private String productDescription;
 
-    @ManyToMany
-            (fetch = FetchType.EAGER,
-    cascade = CascadeType.ALL)
-    @JoinTable(
-            name = "PRODUCT_GROUP",
-            joinColumns = @JoinColumn(name = "GROUP_ID"),
-            inverseJoinColumns = @JoinColumn(name = "PRODUCT_ID"))
+    @ManyToMany(mappedBy = "products")
     private Set<Group> groupsOfProduct = new HashSet<>();
 
 }
