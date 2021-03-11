@@ -16,12 +16,12 @@ import java.util.Set;
 @Getter
 public class User {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "user_id")
     private Long id;
 
     @NotNull
-    private String name;
+    private String userName;
 
     @NotNull
     private String e_mail;
