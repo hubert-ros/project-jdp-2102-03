@@ -2,12 +2,12 @@ package com.kodilla.ecommercee.domain;
 
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
-import lombok.NonNull;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 @Entity
-@Table(name = "USERS")
+@Table(name = "CARTS")
 @AllArgsConstructor
 @NoArgsConstructor
 public class Cart {
@@ -16,7 +16,7 @@ public class Cart {
     @Column(name = "cart_id")
     private Long id;
 
-    @NonNull
+    @NotNull
     @OneToOne
     @JoinColumn(name = "order_id")
     private Cart cart;

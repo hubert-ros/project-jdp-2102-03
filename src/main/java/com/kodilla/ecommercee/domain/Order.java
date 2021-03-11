@@ -3,14 +3,15 @@ package com.kodilla.ecommercee.domain;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.NonNull;
+import javax.validation.constraints.NotNull;
 
 import javax.persistence.*;
 
-@NoArgsConstructor
+@Entity
+@Table(name = "ORDERS")
 @AllArgsConstructor
+@NoArgsConstructor
 @Getter
-@Entity(name = "order")
 public class Order {
     enum OrderStatus {
         UNPAID,
@@ -19,15 +20,16 @@ public class Order {
     }
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "order_id")
     private Long id;
 
-    @NonNull
+    @NotNull
     @OneToOne
     @JoinColumn(name = "cart_id")
     private Cart cart;
 
-    @NonNull
+    @NotNull
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
