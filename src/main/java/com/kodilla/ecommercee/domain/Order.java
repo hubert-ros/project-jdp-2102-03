@@ -17,7 +17,7 @@ import javax.persistence.*;
 @Setter
 public class Order {
 
-    enum OrderStatus {
+    public enum OrderStatus {
         UNPAID,
         PAID,
         CANCELED

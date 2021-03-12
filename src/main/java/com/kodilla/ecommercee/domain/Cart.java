@@ -23,6 +23,6 @@ public class Cart {
     @NotNull
     @OneToOne
     @JoinColumn(name = "order_id")
-    private Cart cart;
+    private Order order;
 
 }
