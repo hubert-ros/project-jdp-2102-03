@@ -3,9 +3,8 @@ package com.kodilla.ecommercee.domain;
 import lombok.*;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity(name = "CARTS")
 @AllArgsConstructor
@@ -15,18 +14,21 @@ import java.util.List;
 public class Cart {
 
         @Id
-        @NotNull
         @GeneratedValue
         @Column(name = "CART_ID", unique = true)
         private Long cartId;
 
-        @OneToMany(
-                targetEntity = Product.class,
-                mappedBy = "carts",
-                cascade = CascadeType.ALL,
-                fetch = FetchType.LAZY
+        @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+        @JoinColumn(name = "ORDER-ID")
+        private Order order;
+
+        @ManyToMany(targetEntity = Product.class, cascade = CascadeType.ALL)
+        @JoinTable(
+                name = "PRODUCTS_IN_CART",
+                joinColumns = @JoinColumn(name = "CART_ID"),
+                inverseJoinColumns = @JoinColumn(name = "PRODUCT_ID")
         )
-        public List<Product> productsInCart = new ArrayList<>();
+        public Set<Product> products = new HashSet<>();
 }
 
 
