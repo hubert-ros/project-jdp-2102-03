@@ -14,17 +14,18 @@ import java.util.Set;
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
+@Setter
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "user_id")
-    private Long id;
+    private Long userId;
 
     @NotNull
     private String userName;
 
     @NotNull
-    private String e_mail;
+    private String eMail;
 
     @NotNull
     private String address;
