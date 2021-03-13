@@ -16,8 +16,8 @@ import java.util.List;
 public class Cart {
 
         @Id
-        @GeneratedValue
-        @Column(name = "CART_ID", unique = true)
+        @GeneratedValue(strategy = GenerationType.IDENTITY)
+        @Column(name = "CART_ID")
         private Long cartId;
 
         @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
