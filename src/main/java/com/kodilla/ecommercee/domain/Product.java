@@ -24,6 +24,9 @@ public class Product {
     @NotNull
     private String productDescription;
 
+    @NotNull
+    private Double price;
+
     @ManyToMany(mappedBy = "products")
     private Set<Group> groupsOfProduct = new HashSet<>();
 
