@@ -20,7 +20,8 @@ public class Group {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @Column(name = "GROUP_ID")
+    private Long groupId;
 
     @NotNull
     private String name;
