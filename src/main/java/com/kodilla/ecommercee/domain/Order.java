@@ -5,6 +5,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import javax.validation.constraints.NotNull;
+
 import javax.persistence.*;
 
 @Entity
@@ -15,11 +17,28 @@ import javax.persistence.*;
 @Setter
 public class Order {
 
+    public enum OrderStatus {
+        UNPAID,
+        PAID,
+        CANCELED
+    }
+
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "order_id")
     private Long id;
 
+    @NotNull
+    @OneToOne
+    @JoinColumn(name = "cart_id")
+    private Cart cart;
+
+    @NotNull
     @ManyToOne
-    @JoinColumn(name = "USER_ID")
+    @JoinColumn(name = "user_id")
     private User user;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "status")
+    private OrderStatus status;
 }
