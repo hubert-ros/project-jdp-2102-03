@@ -36,4 +36,10 @@ public class User {
             fetch = FetchType.EAGER,
             cascade = CascadeType.ALL)
     private final Set<Order> orders = new HashSet<>();
+
+    public User(@NotNull String userName, @NotNull String eMail, @NotNull String address) {
+        this.userName = userName;
+        this.eMail = eMail;
+        this.address = address;
+    }
 }
