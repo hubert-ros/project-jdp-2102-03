@@ -1,5 +1,16 @@
 package com.kodilla.ecommercee.domain;
 
+
+import lombok.*;
+
+import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -11,6 +22,7 @@ import java.util.Set;
 
 @Entity
 @Table(name = "PRODUCTS")
+
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
@@ -21,9 +33,22 @@ public class Product {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long productId;
 
+    @NotNull
+    private String productName;
+
+    @NotNull
+    private String productDescription;
+
+    @NotNull
+    private Double price;
+
+
     @ManyToMany(mappedBy = "products")
     private Set<Group> groupsOfProduct = new HashSet<>();
 
     @ManyToMany(mappedBy = "products")
-    private Set<Cart> cartOfProduct = new HashSet<>();;
+
+    private List<Cart> carts = new ArrayList<>();
+
 }
+
