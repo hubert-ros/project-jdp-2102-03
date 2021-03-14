@@ -23,4 +23,7 @@ public class Product {
 
     @ManyToMany(mappedBy = "products")
     private Set<Group> groupsOfProduct = new HashSet<>();
+
+    @ManyToMany(mappedBy = "products")
+    private Set<Cart> cartOfProduct = new HashSet<>();;
 }
