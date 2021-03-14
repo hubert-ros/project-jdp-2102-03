@@ -10,7 +10,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@Table(name = "PRODUCT")
+@Table(name = "PRODUCTS")
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
@@ -19,7 +19,7 @@ public class Product {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long ID;
+    private Long productId;
 
     @ManyToMany(mappedBy = "products")
     private Set<Group> groupsOfProduct = new HashSet<>();
