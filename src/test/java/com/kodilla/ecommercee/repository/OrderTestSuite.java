@@ -116,11 +116,6 @@ public class OrderTestSuite {
 
         Long order2Id = order2.getId();
         System.out.println(order2Id);
-
-//        user.getOrders().remove(0);
-//        cart2.setOrder(null);
-//        order2.setCart(null);
-//        order2.setUser(null);
         orderRepository.deleteById(order2Id);
 
         List<Order> orders = orderRepository.findAll();

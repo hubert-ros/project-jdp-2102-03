@@ -7,7 +7,6 @@ import javax.validation.constraints.NotNull;
 
 import java.util.HashSet;
 import java.util.Set;
-import java.util.UUID;
 
 @Entity
 @Table(name = "USERS")
@@ -16,12 +15,11 @@ import java.util.UUID;
 @Getter
 @Setter
 public class User {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "user_id")
     private Long userId;
-
-    //private String uuid = UUID.randomUUID().toString();
 
     @NotNull
     @NonNull
@@ -39,7 +37,7 @@ public class User {
     private Boolean isBlocked = false;
 
     @OneToMany(mappedBy = "user",
-            fetch = FetchType.EAGER,
-            cascade = CascadeType.ALL)
+            fetch = FetchType.EAGER)
     private Set<Order> orders = new HashSet<>();
+
 }
