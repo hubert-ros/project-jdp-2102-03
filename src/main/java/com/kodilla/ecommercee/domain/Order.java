@@ -1,18 +1,17 @@
 package com.kodilla.ecommercee.domain;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.validation.constraints.NotNull;
 
 import javax.persistence.*;
+import java.util.UUID;
 
 @Entity
 @Table(name = "ORDERS")
 @AllArgsConstructor
 @NoArgsConstructor
+@RequiredArgsConstructor
 @Getter
 @Setter
 public class Order {
@@ -28,17 +27,19 @@ public class Order {
     @Column(name = "order_id")
     private Long id;
 
-    @NotNull
+    //@NotNull
     @OneToOne
     @JoinColumn(name = "cart_id")
     private Cart cart;
 
-    @NotNull
+    //@NotNull
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
 
+    @NonNull
     @Enumerated(EnumType.STRING)
     @Column(name = "status")
     private OrderStatus status;
+
 }
