@@ -1,11 +1,7 @@
 package com.kodilla.ecommercee.domain;
 
 import lombok.*;
-
-import javax.validation.constraints.NotNull;
-
 import javax.persistence.*;
-import java.util.UUID;
 
 @Entity
 @Table(name = "ORDERS")
@@ -27,13 +23,11 @@ public class Order {
     @Column(name = "order_id")
     private Long id;
 
-    //@NotNull
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "cart_id")
     private Cart cart;
 
-    //@NotNull
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "user_id")
     private User user;
 
