@@ -7,8 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import java.util.Optional;
+import java.util.List;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 @RunWith(SpringRunner.class)
@@ -22,16 +23,72 @@ public class UserTestSuite {
     public void testCreateUser() {
         //Given
         User user = new User("Andrzej", "anderw@golota.pl", "USA");
+        userRepository.save(user);
 
         //When
-        userRepository.save(user);
 
         //Then
         Long id = user.getUserId();
-        Optional<User> readTask = userRepository.findById(id);
-        assertTrue(readTask.isPresent());
+
+        assertTrue(userRepository.findById(id).isPresent());
 
         //CleanUp
-        //userRepository.deleteById(id);
+        userRepository.deleteById(id);
+    }
+
+    @Test
+    public void testFindByUserName() {
+         //Given
+         User user = new User("Andrzej", "anderw@golota.pl", "USA");
+         userRepository.save(user);
+
+         //When
+
+         //Then
+         assertTrue(userRepository.findByUserName("Andrzej").isPresent());
+
+         //CleanUp
+         userRepository.deleteById(user.getUserId());
+    }
+
+    @Test
+    public void testUserUpdate() {
+        //Given
+        User user = new User("Andrzej", "anderw@golota.pl", "USA");
+        userRepository.save(user);
+
+        //When
+        Long id = user.getUserId();
+        user.setEMail("xxx@xxx.pl");
+        userRepository.save(user);
+
+        //Then
+        assertEquals("xxx@xxx.pl", userRepository.findById(id).get().getEMail());
+        assertEquals(1, userRepository.count());
+
+        //CleanUp
+        userRepository.deleteById(id);
+    }
+
+    @Test
+    public void testFindAll() {
+        //Given
+        User user1 = new User("Andrzej", "anderw@golota.pl", "USA");
+        User user2 = new User("Tomek", "qwewqe@wewqwqe.pl", "PL");
+        User user3 = new User("Ola", "wqewqe@wewqewq.pl", "DE");
+        userRepository.save(user1);
+        userRepository.save(user2);
+        userRepository.save(user3);
+
+        //When
+        List<User> users = userRepository.findAll();
+
+        //Then
+        assertEquals(3, users.size());
+
+        //CleanUp
+        userRepository.deleteById(user1.getUserId());
+        userRepository.deleteById(user2.getUserId());
+        userRepository.deleteById(user3.getUserId());
     }
 }
