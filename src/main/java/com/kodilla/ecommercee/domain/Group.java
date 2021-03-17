@@ -1,9 +1,6 @@
 package com.kodilla.ecommercee.domain;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -33,4 +30,9 @@ public class Group {
             joinColumns = @JoinColumn(name = "GROUP_ID"),
             inverseJoinColumns = @JoinColumn(name = "PRODUCT_ID"))
     private Set<Product> products  = new HashSet<>();
+
+    public Group(@NotNull String name, Set<Product> products) {
+        this.name = name;
+        this.products = products;
+    }
 }
