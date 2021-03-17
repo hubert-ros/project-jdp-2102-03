@@ -17,6 +17,7 @@ import static org.junit.Assert.*;
 @SpringBootTest
 @Transactional
 public class CartTestSuite {
+
     @Autowired
     private CartRepository cartRepository;
 

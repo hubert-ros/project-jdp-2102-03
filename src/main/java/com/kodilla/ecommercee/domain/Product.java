@@ -1,8 +1,5 @@
 package com.kodilla.ecommercee.domain;
 
-
-import lombok.*;
-
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
@@ -11,19 +8,13 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.*;
-import java.util.HashSet;
-import java.util.Set;
-
 @Entity
 @Table(name = "PRODUCTS")
-
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
@@ -51,4 +42,9 @@ public class Product {
 
     private List<Cart> carts = new ArrayList<>();
 
+    public Product(@NotNull String productName, @NotNull String productDescription, @NotNull BigDecimal price) {
+        this.productName = productName;
+        this.productDescription = productDescription;
+        this.price = price;
+    }
 }

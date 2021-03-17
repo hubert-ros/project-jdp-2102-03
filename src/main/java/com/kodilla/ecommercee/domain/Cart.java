@@ -6,10 +6,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
-import lombok.*;
-
-import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
@@ -41,6 +37,10 @@ public class Cart {
 
         @Column(name = "VALUE")
         private BigDecimal value;
+
+        public Cart(BigDecimal value) {
+                this.value = value;
+        }
 }
 
 
