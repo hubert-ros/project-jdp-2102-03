@@ -21,8 +21,6 @@ public class User {
     @Column(name = "user_id")
     private Long userId;
 
-    private String userKey;
-
     @NotNull
     @NonNull
     private String userName;
