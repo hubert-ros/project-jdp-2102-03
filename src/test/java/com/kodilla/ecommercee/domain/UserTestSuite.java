@@ -91,4 +91,25 @@ public class UserTestSuite {
         userRepository.deleteById(user2.getUserId());
         userRepository.deleteById(user3.getUserId());
     }
+
+    @Test
+    public void testBlockUser() {
+        //Given
+        User user = new User("Pan kleks", "a@b.pl", "x");
+        userRepository.save(user);
+
+        //When
+        Long id = user.getUserId();
+
+        User readUser = userRepository.findById(id).get();
+        readUser.setBlocked(true);
+        userRepository.save(readUser);
+
+        //Then
+        assertTrue(userRepository.findById(id).get().isBlocked());
+        assertEquals(1, userRepository.count());
+
+        //CleanUp
+        userRepository.deleteById(id);
+    }
 }

@@ -34,7 +34,7 @@ public class User {
     private String address;
 
     @NotNull
-    private Boolean isBlocked = false;
+    private boolean blocked = false;
 
     @OneToMany(mappedBy = "user",
 
