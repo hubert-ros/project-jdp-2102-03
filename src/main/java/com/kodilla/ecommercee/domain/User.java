@@ -1,9 +1,6 @@
 package com.kodilla.ecommercee.domain;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -13,33 +10,35 @@ import java.util.Set;
 
 @Entity
 @Table(name = "USERS")
-@AllArgsConstructor
 @NoArgsConstructor
+@RequiredArgsConstructor
 @Getter
 @Setter
 public class User {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "user_id")
     private Long userId;
 
     @NotNull
+    @NonNull
     private String userName;
 
     @NotNull
+    @NonNull
     private String eMail;
 
     @NotNull
+    @NonNull
     private String address;
 
-    @OneToMany(mappedBy = "user",
-            fetch = FetchType.EAGER,
-            cascade = CascadeType.ALL)
-    private final Set<Order> orders = new HashSet<>();
+    @NotNull
+    private Boolean isBlocked = false;
 
-    public User(@NotNull String userName, @NotNull String eMail, @NotNull String address) {
-        this.userName = userName;
-        this.eMail = eMail;
-        this.address = address;
-    }
+    @OneToMany(mappedBy = "user",
+
+            fetch = FetchType.EAGER)
+    private Set<Order> orders = new HashSet<>();
+  
 }
