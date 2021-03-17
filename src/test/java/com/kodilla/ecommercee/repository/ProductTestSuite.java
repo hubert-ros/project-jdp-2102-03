@@ -49,14 +49,20 @@ public class ProductTestSuite {
         Product product2 = new Product("Suit", "100% wool business suit", new BigDecimal(1199.00));
 
         List<Product> products = new ArrayList<>();
+        //products.add(product1);
+        //products.add(product2);
+
         Cart cart1 = new Cart();
+        Cart cart2 = new Cart();
         cart1.setProducts(products);
+
 
         //When
         cartRepository.save(cart1);
 
         //Then
         assertEquals(1, cartRepository.count());
+        //assertEquals(false, products.isEmpty());
 
 
 
