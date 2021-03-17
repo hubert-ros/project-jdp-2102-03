@@ -1,7 +1,6 @@
 package com.kodilla.ecommercee.domain;
 
 import com.kodilla.ecommercee.repository.GroupRepository;
-import com.kodilla.ecommercee.repository.ProductRepository;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -21,13 +20,12 @@ public class GroupTestSuit {
 
     @Autowired
     private GroupRepository groupRepository;
-    @Autowired
-    private ProductRepository productRepository;
 
     @Test
     public void testCreateGroup() {
         //Given
-        Group groupOne = new Group();
+        Set<Product> listGroupOne = new HashSet<>();
+        Group groupOne = new Group("GroupOneTest", listGroupOne);
 
         //When
         groupRepository.save(groupOne);
@@ -44,10 +42,11 @@ public class GroupTestSuit {
     @Test
     public void testGetAllGroup() {
         //Given
-        Group groupOne = new Group();
-        Group groupTwo = new Group();
-        Group grouThree = new Group();
-        Group groupFour = new Group();
+        Set<Product> listGroupOne = new HashSet<>();
+        Group groupOne = new Group("GroupOneTest", listGroupOne);
+        Group groupTwo = new Group("GroupTwoTest", listGroupOne);
+        Group grouThree = new Group("GroupThreeTest", listGroupOne);
+        Group groupFour = new Group("GroupFourTest", listGroupOne);
 
         //When
         groupRepository.save(groupOne);
@@ -74,7 +73,8 @@ public class GroupTestSuit {
     @Test
     public void testGetGroupById() {
         //Given
-        Group groupOne = new Group();
+        Set<Product> listGroupOne = new HashSet<>();
+        Group groupOne = new Group("GroupOneTest", listGroupOne);
 
         //When
         groupRepository.save(groupOne);
@@ -91,8 +91,9 @@ public class GroupTestSuit {
     @Test
     public void testDeleteGroupById() {
         //Given
-        Group groupOne = new Group();
-        Group groupTwo = new Group();
+        Set<Product> listGroupOne = new HashSet<>();
+        Group groupOne = new Group("GroupOneTest", listGroupOne);
+        Group groupTwo = new Group("GroupTwoTest", listGroupOne);
 
         //When
         groupRepository.save(groupOne);

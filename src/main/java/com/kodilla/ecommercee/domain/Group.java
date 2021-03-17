@@ -20,7 +20,7 @@ public class Group {
     @Column(name = "GROUP_ID")
     private Long groupId;
 
-    @Column(name = "NAME")
+    @NotNull
     private String name;
 
     @ManyToMany(
@@ -31,7 +31,7 @@ public class Group {
             inverseJoinColumns = @JoinColumn(name = "PRODUCT_ID"))
     private Set<Product> products  = new HashSet<>();
 
-    public Group(String name, Set<Product> products) {
+    public Group(@NotNull String name, Set<Product> products) {
         this.name = name;
         this.products = products;
     }
