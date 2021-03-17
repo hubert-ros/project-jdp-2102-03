@@ -13,8 +13,11 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import javax.transaction.Transactional;
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+
+import static org.junit.Assert.assertEquals;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -34,17 +37,28 @@ public class ProductTestSuite {
     @Autowired
     private ProductRepository productRepository;
 
+    @Autowired
+    private GroupRepository groupRepository;
+
 
     @Test
     public void testProductAddedToCart() {
 
         //Given
-        Product product1 = new Product(new String("Shoes"), new String("Running shoes"), new BigDecimal(199.00));
+        Product product1 = new Product("Shoes", "Super comfortable running shoes", new BigDecimal("199.99"));
+        Product product2 = new Product("Suit", "100% wool business suit", new BigDecimal(1199.00));
 
+        List<Product> products = new ArrayList<>();
+        Cart cart1 = new Cart();
+        cart1.setProducts(products);
 
         //When
+        cartRepository.save(cart1);
 
         //Then
+        assertEquals(1, cartRepository.count());
+
+
 
     }
 

@@ -25,13 +25,14 @@ import java.util.Set;
 @Table(name = "PRODUCTS")
 
 @NoArgsConstructor
-@AllArgsConstructor
+//@RequiredArgsConstructor
 @Getter
 @Setter
 public class Product {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @NotNull
     private Long productId;
 
     @NotNull
@@ -43,6 +44,11 @@ public class Product {
     @NotNull
     private BigDecimal price;
 
+    public Product(@NotNull String productName, @NotNull String productDescription, @NotNull BigDecimal price) {
+        this.productName = productName;
+        this.productDescription = productDescription;
+        this.price = price;
+    }
 
     @ManyToMany(mappedBy = "products")
     private Set<Group> groupsOfProduct = new HashSet<>();
