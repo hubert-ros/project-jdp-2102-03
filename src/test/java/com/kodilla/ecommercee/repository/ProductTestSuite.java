@@ -17,7 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -64,6 +64,30 @@ public class ProductTestSuite {
         assertEquals(1, cartRepository.count());
         //assertEquals(false, products.isEmpty());
 
+    }
+
+    @Test
+    public void createProductTest() {
+
+        //Given
+        Product product1 = new Product("Shoes", "Super comfortable running shoes", new BigDecimal("199.99"));
+        Product product2 = new Product("Suit", "100% wool business suit", new BigDecimal(1199.00));
+
+        List<Product> products = new ArrayList<>();
+        products.add(product1);
+        products.add(product2);
+
+        //When
+        //productRepository.save(product1);
+        //productRepository.save(product2);
+
+        Long productId = product1.getProductId();
+
+        //productRepository.save(products);
+
+        //Then
+        //assertEquals(2, products.size());
+        assertTrue(productRepository.findByProductId(productId).isEmpty());
 
 
     }

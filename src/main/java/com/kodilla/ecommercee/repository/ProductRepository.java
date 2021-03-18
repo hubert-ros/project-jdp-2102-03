@@ -10,6 +10,15 @@ import java.util.List;
 @Repository
 @Transactional
 public interface ProductRepository extends CrudRepository<Product, Long> {
+
+
     List<Product> findByProductName(String name);
+
     List<Product> findByProductId(Long id);
+
+    @Override
+    Product save(Product product);
+
+    List<Product> save (List list);
+
 }
