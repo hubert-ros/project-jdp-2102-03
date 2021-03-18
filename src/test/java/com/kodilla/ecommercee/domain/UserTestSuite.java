@@ -1,5 +1,7 @@
 package com.kodilla.ecommercee.domain;
 
+import com.kodilla.ecommercee.repository.CartRepository;
+import com.kodilla.ecommercee.repository.OrderRepository;
 import com.kodilla.ecommercee.repository.UserRepository;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -18,6 +20,13 @@ public class UserTestSuite {
 
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private OrderRepository orderRepository;
+
+    @Autowired
+    private CartRepository cartRepository;
+
 
     @Test
     public void testCreateUser() {
@@ -111,5 +120,26 @@ public class UserTestSuite {
 
         //CleanUp
         userRepository.deleteById(id);
+    }
+
+    @Test
+    public void shouldCreateRelationWithOrder() {
+        //Given
+        User user = new User("user 1", "user@mail.pl", "PL");
+        Order order = new Order(Order.OrderStatus.UNPAID);
+        userRepository.save(user);
+        orderRepository.save(order);
+
+        user.getOrders().add(order);
+        order.setUser(user);
+        userRepository.save(user);
+        orderRepository.save(order);
+
+        //When
+        Long orderId = order.getId();
+        Order readOrder = orderRepository.findById(orderId).get();
+
+        //Then
+        assertEquals("user 1", readOrder.getUser().getUserName());
     }
 }
