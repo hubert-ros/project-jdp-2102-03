@@ -1,5 +1,6 @@
 package com.kodilla.ecommercee.domain;
 
+import com.kodilla.ecommercee.repository.OrderRepository;
 import com.kodilla.ecommercee.repository.UserRepository;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -7,17 +8,22 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import javax.transaction.Transactional;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
+@Transactional
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class UserTestSuite {
 
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private OrderRepository orderRepository;
 
     @Test
     public void testCreateUser() {
@@ -111,5 +117,26 @@ public class UserTestSuite {
 
         //CleanUp
         userRepository.deleteById(id);
+    }
+
+    @Test
+    public void shouldCreateRelationWithOrder() {
+        //Given
+        User user = new User("user 1", "user@mail.pl", "PL");
+        Order order = new Order(Order.OrderStatus.UNPAID);
+        userRepository.save(user);
+        orderRepository.save(order);
+
+        user.getOrders().add(order);
+        order.setUser(user);
+        userRepository.save(user);
+        orderRepository.save(order);
+
+        //When
+        Long orderId = order.getId();
+        Order readOrder = orderRepository.findById(orderId).get();
+
+        //Then
+        assertEquals("user 1", readOrder.getUser().getUserName());
     }
 }
