@@ -9,11 +9,8 @@ import java.util.Set;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-public class UserDto {
-    private Long userId;
-    private String userName;
-    private String eMail;
-    private String address;
-    private boolean blocked;
-    private Set<Order> orders;
+public class GroupDto {
+    private Long groupId;
+    private String name;
+    private Set<Product> products;
 }

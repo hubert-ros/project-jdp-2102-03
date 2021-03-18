@@ -21,8 +21,6 @@ public class User {
     @Column(name = "user_id")
     private Long userId;
 
-    private String userKey;
-
     @NotNull
     @NonNull
     private String userName;
@@ -36,7 +34,7 @@ public class User {
     private String address;
 
     @NotNull
-    private Boolean isBlocked = false;
+    private boolean blocked = false;
 
     @OneToMany(mappedBy = "user",
             fetch = FetchType.EAGER)

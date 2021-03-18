@@ -12,4 +12,6 @@ import java.util.List;
 public interface ProductRepository extends CrudRepository<Product, Long> {
     List<Product> findByProductName(String name);
     List<Product> findByProductId(Long id);
+    @Override
+    List<Product> findAll();
 }

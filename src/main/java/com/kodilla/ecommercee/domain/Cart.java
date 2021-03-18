@@ -1,23 +1,17 @@
 package com.kodilla.ecommercee.domain;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-
-import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 import lombok.*;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
 @Table(name = "CARTS")
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 @Getter
 @Setter
 public class Cart {
@@ -39,8 +33,12 @@ public class Cart {
         )
         public List<Product> products = new ArrayList<>();
 
-        @Column(name = "VALUE")
+        @NotNull
         private BigDecimal value;
+
+        public Cart(BigDecimal value) {
+                this.value = value;
+        }
 }
 
 

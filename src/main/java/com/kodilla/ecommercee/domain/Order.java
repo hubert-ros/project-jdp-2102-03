@@ -7,7 +7,6 @@ import javax.persistence.*;
 @Table(name = "ORDERS")
 @AllArgsConstructor
 @NoArgsConstructor
-@RequiredArgsConstructor
 @Getter
 @Setter
 public class Order {
@@ -36,4 +35,7 @@ public class Order {
     @Column(name = "status")
     private OrderStatus status;
 
+    public Order(OrderStatus status) {
+        this.status = status;
+    }
 }

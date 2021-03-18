@@ -1,6 +1,5 @@
 package com.kodilla.ecommercee.domain;
 
-
 import lombok.*;
 
 import javax.persistence.*;
@@ -11,15 +10,10 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
-import javax.persistence.*;
-import java.util.HashSet;
-import java.util.Set;
 
 @Entity
 @Table(name = "PRODUCTS")
@@ -43,12 +37,15 @@ public class Product {
     @NotNull
     private BigDecimal price;
 
-
-    @ManyToMany(mappedBy = "products")
+    @ManyToMany(mappedBy = "products", cascade = CascadeType.PERSIST)
     private Set<Group> groupsOfProduct = new HashSet<>();
 
-    @ManyToMany(mappedBy = "products")
-
+    @ManyToMany(mappedBy = "products",cascade = CascadeType.PERSIST)
     private List<Cart> carts = new ArrayList<>();
 
+    public Product(String productName, String productDescription, BigDecimal price) {
+        this.productName = productName;
+        this.productDescription = productDescription;
+        this.price = price;
+    }
 }
