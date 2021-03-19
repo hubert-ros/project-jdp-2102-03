@@ -5,8 +5,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
-import java.util.List;
-import java.util.Set;
 
 @Getter
 @AllArgsConstructor
@@ -16,6 +14,4 @@ public class ProductDto {
     private String productName;
     private String productDescription;
     private BigDecimal price;
-    private Set<Group> groupsOfProduct;
-    private List<Cart> carts;
 }

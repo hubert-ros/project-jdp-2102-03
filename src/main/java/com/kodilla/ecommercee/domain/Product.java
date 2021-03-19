@@ -1,7 +1,4 @@
 package com.kodilla.ecommercee.domain;
-
-import lombok.*;
-
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
@@ -17,13 +14,11 @@ import lombok.Setter;
 
 @Entity
 @Table(name = "PRODUCTS")
-
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
 @Setter
 public class Product {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long productId;
@@ -37,13 +32,14 @@ public class Product {
     @NotNull
     private BigDecimal price;
 
-    @ManyToMany(mappedBy = "products", cascade = CascadeType.PERSIST)
+    @ManyToMany(mappedBy = "products")
     private Set<Group> groupsOfProduct = new HashSet<>();
 
-    @ManyToMany(mappedBy = "products",cascade = CascadeType.PERSIST)
+    @ManyToMany(mappedBy = "products")
     private List<Cart> carts = new ArrayList<>();
 
-    public Product(String productName, String productDescription, BigDecimal price) {
+    public Product(@NotNull String productName,
+                   @NotNull String productDescription, @NotNull BigDecimal price) {
         this.productName = productName;
         this.productDescription = productDescription;
         this.price = price;
