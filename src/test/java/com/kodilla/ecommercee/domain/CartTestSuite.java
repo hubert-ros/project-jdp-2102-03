@@ -1,5 +1,6 @@
 package com.kodilla.ecommercee.domain;
 
+import com.kodilla.ecommercee.exception.ResourceNotExistException;
 import com.kodilla.ecommercee.repository.CartRepository;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -10,6 +11,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import javax.transaction.Transactional;
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Optional;
 
 import static org.junit.Assert.*;
 
@@ -25,11 +27,13 @@ public class CartTestSuite {
     public void shouldCreateEmptyCart() {
         //Given
         Cart cart = new Cart(new BigDecimal("0"));
-        List<Product> products = cart.getProducts();
-
-        //When
         cartRepository.save(cart);
         long cartId = cart.getCartId();
+
+        //When
+        Optional<Cart> savedCart = cartRepository.findById(cartId);
+        Cart cart1 = savedCart.orElse(new Cart(new BigDecimal("0")));
+        List<Product> products = cart1.getProducts();
 
         //Then
         BigDecimal value = new BigDecimal("0");
@@ -50,11 +54,14 @@ public class CartTestSuite {
         Cart cart = new Cart(new BigDecimal("0"));
         cart.getProducts().add(product);
         cart.setValue(new BigDecimal("10"));
-        List<Product> products = cart.getProducts();
 
-        //When
         cartRepository.save(cart);
         long cartId = cart.getCartId();
+
+        //When
+        Optional<Cart> savedCart = cartRepository.findById(cartId);
+        Cart cart1 = savedCart.orElse(new Cart(new BigDecimal("0")));
+        List<Product> products = cart1.getProducts();
 
         //Then
         assertNotEquals(0, cartId);
@@ -77,11 +84,14 @@ public class CartTestSuite {
         cart.getProducts().add(product);
         cart.getProducts().add(product);
         cart.setValue(new BigDecimal("22.50"));
-        List<Product> products = cart.getProducts();
 
-        //When
         cartRepository.save(cart);
         long cartId = cart.getCartId();
+
+        //When
+        Optional<Cart> savedCart = cartRepository.findById(cartId);
+        Cart cart1 = savedCart.orElse(new Cart(new BigDecimal("0")));
+        List<Product> products = cart1.getProducts();
 
         //Then
         assertNotEquals(0, cartId);
@@ -105,15 +115,16 @@ public class CartTestSuite {
         cart.getProducts().add(product1);
         cart.getProducts().add(product2);
         cart.setValue(new BigDecimal("24.50"));
-        List<Product> products = cart.getProducts();
-
-        //When
         cartRepository.save(cart);
         long cartId = cart.getCartId();
 
+        //When
+        Optional<Cart> savedCart = cartRepository.findById(cartId);
+        Cart cart1 = savedCart.orElse(new Cart(new BigDecimal("0")));
+        List<Product> products = cart1.getProducts();
+
         //Then
         assertNotEquals(0, cartId);
-        assertNotEquals(product1, product2);
         assertEquals(2, products.size());
     }
 
@@ -137,7 +148,6 @@ public class CartTestSuite {
         cart.getProducts().add(product1);
         cart.getProducts().add(product2);
         cart.getProducts().add(product3);
-
         cart.setValue(new BigDecimal("34.50"));
         List<Product> products = cart.getProducts();
 
@@ -145,7 +155,10 @@ public class CartTestSuite {
         long cartId = cart.getCartId();
 
         //When
-        cart.getProducts().removeAll(products);
+        Optional<Cart> savedCart = cartRepository.findById(cartId);
+        Cart cart1 = savedCart.orElseGet(() -> new Cart(new BigDecimal("0")));
+        List<Product> productsInDatabase = cart1.getProducts();
+        productsInDatabase.removeAll(products);
         cart.setValue(new BigDecimal("0"));
 
         //Then
@@ -157,7 +170,7 @@ public class CartTestSuite {
     }
 
     @Test
-    public void shouldRemoveOneProductFromCart() {
+    public void shouldRemoveOneProductFromCart() throws ResourceNotExistException {
         //Given
         Group group = new Group("Toys");
         Product product = new Product("blocks", "wooden blocks", new BigDecimal("4.50"));
@@ -180,11 +193,14 @@ public class CartTestSuite {
         long cartId = cart.getCartId();
 
         //When
-        cart.getProducts().remove(product1);
-        List<Product> updatedProducts = cart.getProducts();
+        Optional<Cart> savedCart = cartRepository.findById(cartId);
+        Cart cart1 = savedCart.orElseThrow(() -> new ResourceNotExistException("The cart does not exist in the database."));
+        List<Product> products = cart1.getProducts();
+        products.remove(product1);
+        int cartSize = products.size();
 
         //Then
         assertNotEquals(0, cartId);
-        assertEquals(2, updatedProducts.size());
+        assertEquals(2, cartSize);
     }
 }
