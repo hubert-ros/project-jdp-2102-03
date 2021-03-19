@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class OrderDto {
     private Long id;
-    private long cartId;
-    private long userId;
+    private Cart cart;
+    private User user;
     private Order.OrderStatus status;
 }

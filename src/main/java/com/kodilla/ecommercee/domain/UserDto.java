@@ -4,8 +4,6 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import java.util.Set;
-
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
@@ -15,5 +13,4 @@ public class UserDto {
     private String eMail;
     private String address;
     private boolean blocked;
-    private Set<Order> orders;
 }

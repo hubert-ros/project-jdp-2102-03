@@ -3,7 +3,6 @@ package com.kodilla.ecommercee.domain;
 import lombok.*;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
@@ -33,8 +32,14 @@ public class Cart {
         )
         public List<Product> products = new ArrayList<>();
 
-        @NotNull
+        @Column(name = "VALUE")
         private BigDecimal value;
+
+        public Cart(Long cartId, Order order, BigDecimal value) {
+                this.cartId = cartId;
+                this.order = order;
+                this.value = value;
+        }
 
         public Cart(BigDecimal value) {
                 this.value = value;

@@ -9,16 +9,16 @@ import java.util.stream.Collectors;
 public class CartMapper {
 
     public CartDto mapToCartDTO(final Cart cart) {
-        return new CartDto(cart.getCartId(),
+        return new CartDto(
+                cart.getCartId(),
                 cart.getOrder(),
-                cart.getProducts(),
                 cart.getValue());
     }
 
     public Cart mapToCart(final CartDto cartDto) {
-        return new Cart(cartDto.getCartId(),
+        return new Cart(
+                cartDto.getCartId(),
                 cartDto.getOrder(),
-                cartDto.getProducts(),
                 cartDto.getValue());
     }
 

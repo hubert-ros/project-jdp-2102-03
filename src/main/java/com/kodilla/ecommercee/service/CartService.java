@@ -1,55 +1,61 @@
 package com.kodilla.ecommercee.service;
 
 import com.kodilla.ecommercee.domain.Cart;
-import com.kodilla.ecommercee.domain.Order;
 import com.kodilla.ecommercee.domain.Product;
+import com.kodilla.ecommercee.exception.ResourceNotExistException;
 import com.kodilla.ecommercee.repository.CartRepository;
-import com.kodilla.ecommercee.repository.ProductRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.*;
 
 @Service
 @RequiredArgsConstructor
 public class CartService {
     private final CartRepository cartRepository;
-    private final ProductRepository productRepository;
 
-    public Cart createCart(final Cart cart) {
+    public Cart createEmptyCart() {
+        Cart cart = new Cart(new BigDecimal("0"));
         return cartRepository.save(cart);
     }
-    public Cart getCart(long cartId) {
-        Optional<Cart> findCart = cartRepository.findById(cartId);
-        return Optional.of(findCart).get().orElseThrow(NoSuchElementException::new);
+    public Cart getCart(long cartId) throws ResourceNotExistException {
+        Optional<Cart> optionalCart = cartRepository.findById(cartId);
+        return optionalCart.orElseThrow(() -> new ResourceNotExistException("Cart not exists"));
     }
 
-    public Order getOrder(long cartId) {
-        return cartRepository.findByCartId(cartId)
-                .map(Cart::getOrder)
-                .orElseThrow(RuntimeException::new);
+    public List<Product> getProductsFromCart(long cartId) throws ResourceNotExistException {
+        Optional<Cart> optionalCart = cartRepository.findByCartId(cartId);
+        Cart findCart = optionalCart.orElseThrow(() -> new ResourceNotExistException("Cart not exists"));
+        return findCart.getProducts();
     }
 
-    public List<Product> getProductsFromCart(long cartId) {
-        return new ArrayList<>(cartRepository.findByCartId(cartId)
-                .map(Cart::getProducts)
-                .orElse(Collections.emptyList()));
-    }
-
-    public List<Product> addProductToCart(long cartId, Product product) {
-        List<Product> products = cartRepository.findByCartId(cartId)
-                .map(Cart::getProducts)
-                .orElse(Collections.emptyList());
-
+    public List<Product> addProductToCart(long cartId, Product product) throws ResourceNotExistException {
+        Optional<Cart> optionalCart =  cartRepository.findByCartId(cartId);
+        Cart findCart = optionalCart.orElseThrow(() -> new ResourceNotExistException("Cart not exists"));
+        List<Product> products = findCart.getProducts();
         products.add(product);
+        cartRepository.save(findCart);
         return products;
     }
 
-    public List<Product> removeProductFromCart(long cartId, long productId) { //ToDo
-        List<Product> products = cartRepository.findByCartId(cartId)
-                .map(Cart::getProducts)
-                .orElse(Collections.emptyList());
-        Optional<Product> product = products.stream().filter(n -> n.getProductId().equals(productId)).findFirst();
-        return null;
+    public List<Product> removeProductFromCart(long cartId, long productId) throws ResourceNotExistException {
+        Optional<Cart> optionalCart = cartRepository.findByCartId(cartId);
+        Cart findCart = optionalCart.orElseThrow(() -> new ResourceNotExistException("Cart not exists"));
+        List<Product> products = findCart.getProducts();
+
+        Optional<Product> optionalProduct = products.stream()
+                .filter(p -> p.getProductId().equals(productId))
+                .findFirst();
+        Product productToRemove = optionalProduct.orElseThrow(() -> new ResourceNotExistException("No such product in your shopping cart"));
+        products.remove(productToRemove);
+
+        return products;
+    }
+
+    public void deleteCart(long cartId) throws ResourceNotExistException {
+        Optional<Cart> optionalCart = cartRepository.findByCartId(cartId);
+        Cart findCart = optionalCart.orElseThrow(() -> new ResourceNotExistException("Cart not exists"));
+        cartRepository.deleteById(findCart.getCartId());
     }
 }
