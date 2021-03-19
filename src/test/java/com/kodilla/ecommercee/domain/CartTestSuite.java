@@ -150,7 +150,6 @@ public class CartTestSuite {
         cart.getProducts().add(product3);
         cart.setValue(new BigDecimal("34.50"));
         List<Product> products = cart.getProducts();
-
         cartRepository.save(cart);
         long cartId = cart.getCartId();
 
