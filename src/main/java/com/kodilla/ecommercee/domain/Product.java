@@ -16,6 +16,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.persistence.*;
 import java.util.HashSet;
@@ -29,6 +30,7 @@ import java.util.Set;
 @Getter
 @Setter
 public class Product {
+
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -44,17 +46,24 @@ public class Product {
     @NotNull
     private BigDecimal price;
 
+    /*@NotNull
+    private Cart cart;*/
+
     public Product(@NotNull String productName, @NotNull String productDescription, @NotNull BigDecimal price) {
         this.productName = productName;
         this.productDescription = productDescription;
         this.price = price;
     }
 
+
     @ManyToMany(mappedBy = "products")
     private Set<Group> groupsOfProduct = new HashSet<>();
 
-    @ManyToMany(mappedBy = "products")
 
+    @ManyToMany(mappedBy = "products")
     private List<Cart> carts = new ArrayList<>();
 
+    public List<Cart> getCarts() {
+        return carts;
+    }
 }

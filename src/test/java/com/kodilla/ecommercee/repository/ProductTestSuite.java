@@ -1,9 +1,7 @@
 package com.kodilla.ecommercee.repository;
 
-import com.kodilla.ecommercee.domain.Cart;
-import com.kodilla.ecommercee.domain.Order;
-import com.kodilla.ecommercee.domain.Product;
-import com.kodilla.ecommercee.domain.User;
+import com.kodilla.ecommercee.domain.*;
+import com.kodilla.ecommercee.repository.*;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -13,9 +11,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import javax.transaction.Transactional;
 import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 import static org.junit.Assert.*;
 
@@ -41,57 +37,69 @@ public class ProductTestSuite {
     private GroupRepository groupRepository;
 
 
+
     @Test
-    public void testProductAddedToCart() {
+    public void addCartToListTest() {
 
         //Given
-        Product product1 = new Product("Shoes", "Super comfortable running shoes", new BigDecimal("199.99"));
-        Product product2 = new Product("Suit", "100% wool business suit", new BigDecimal(1199.00));
-
-        List<Product> products = new ArrayList<>();
-        //products.add(product1);
-        //products.add(product2);
-
         Cart cart1 = new Cart();
         Cart cart2 = new Cart();
-        cart1.setProducts(products);
 
-
-        //When
-        cartRepository.save(cart1);
-
-        //Then
-        assertEquals(1, cartRepository.count());
-        //assertEquals(false, products.isEmpty());
-
-    }
-
-    @Test
-    public void createProductTest() {
-
-        //Given
         Product product1 = new Product("Shoes", "Super comfortable running shoes", new BigDecimal("199.99"));
         Product product2 = new Product("Suit", "100% wool business suit", new BigDecimal(1199.00));
 
-        List<Product> products = new ArrayList<>();
-        products.add(product1);
-        products.add(product2);
+        product1.getCarts().add(cart1);
+        product1.getCarts().add(cart2);
+
+
+        List<Cart> carts = product1.getCarts();
+
 
         //When
-        //productRepository.save(product1);
-        //productRepository.save(product2);
+        productRepository.save(product1);
+        //cartRepository.save(cart1);
+        //cartRepository.save(cart2);
+        //Optional<Product> savedProduct = Optional.ofNullable(productRepository.save(product1));
+        long productId = product1.getProductId();
 
-        Long productId = product1.getProductId();
-
-        //productRepository.save(products);
 
         //Then
-        //assertEquals(2, products.size());
-        assertTrue(productRepository.findByProductId(productId).isEmpty());
+        assertNotEquals(0, productId); //spr. czy produkt dodano do bazy, baza jest numerowana od 1 więc nierówne
+        assertEquals(2, carts.size());
+        assertEquals(cart1, product1.getCarts().get(0)); //utworzony obiekt i koszyk na liście to te same koszyki
+    }
+
+    /*@Test
+    public void addGroupToSetTest() {
+        //Given
+        Set<Product> listGroupOne = new HashSet<>();
+        Group group1 = new Group();
+        Group group2 = new Group();
+
+        Product product1 = new Product("Shoes", "Super comfortable running shoes", new BigDecimal("199.99"));
+        Product product2 = new Product("Suit", "100% wool business suit", new BigDecimal(1199.00));
+
+        product1.getGroupsOfProduct().add(group1);
+        product1.getGroupsOfProduct().add(group2);
+
+        Set<Group> groupsOfProducts = new HashSet<>();
+
+
+        //When
+        productRepository.save(product1);
+        //cartRepository.save(cart1);
+        //cartRepository.save(cart2);
+        Optional<Product> savedProduct = Optional.ofNullable(productRepository.save(product1));
+        long productId = product1.getProductId();
+
+
+        //Then
+        assertNotEquals(0, productId); //spr. czy produkt dodano do bazy, baza jest numerowana od 1 więc nierówne
+        assertEquals(2, groupsOfProducts.size());
+        //assertEquals(group1, product1.getGroupsOfProduct().get); //utworzony obiekt i koszyk na liście to te same koszyki
 
 
     }
-
-
+*/
 
 }
