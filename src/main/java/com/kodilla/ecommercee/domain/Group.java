@@ -30,4 +30,9 @@ public class Group {
             joinColumns = @JoinColumn(name = "GROUP_ID"),
             inverseJoinColumns = @JoinColumn(name = "PRODUCT_ID"))
     private Set<Product> products  = new HashSet<>();
+
+    public Group(@NotNull String name, Set<Product> products) {
+        this.name = name;
+        this.products = products;
+    }
 }

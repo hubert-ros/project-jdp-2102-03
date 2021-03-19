@@ -34,10 +34,11 @@ public class User {
     private String address;
 
     @NotNull
-    private Boolean isBlocked = false;
+    private boolean blocked = false;
 
     @OneToMany(mappedBy = "user",
+
             fetch = FetchType.EAGER)
     private Set<Order> orders = new HashSet<>();
-
+  
 }

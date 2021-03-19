@@ -34,12 +34,10 @@ public class Product {
     @NotNull
     private BigDecimal price;
 
-
     @ManyToMany(mappedBy = "products")
     private Set<Group> groupsOfProduct = new HashSet<>();
 
     @ManyToMany(mappedBy = "products")
-
     private List<Cart> carts = new ArrayList<>();
 
     public Product(@NotNull String productName, @NotNull String productDescription, @NotNull BigDecimal price) {
@@ -48,3 +46,4 @@ public class Product {
         this.price = price;
     }
 }
+
