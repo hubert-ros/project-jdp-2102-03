@@ -37,7 +37,6 @@ public class ProductTestSuite {
     private GroupRepository groupRepository;
 
 
-
     @Test
     public void addCartToListTest() {
 
@@ -50,56 +49,78 @@ public class ProductTestSuite {
 
         product1.getCarts().add(cart1);
         product1.getCarts().add(cart2);
+        product2.getCarts().add(cart2);
 
+        cart2.getProducts().add(product1);
+        cart2.getProducts().add(product2);
 
         List<Cart> carts = product1.getCarts();
 
-
         //When
         productRepository.save(product1);
-        //cartRepository.save(cart1);
-        //cartRepository.save(cart2);
-        //Optional<Product> savedProduct = Optional.ofNullable(productRepository.save(product1));
+        productRepository.save(product2);
+        cartRepository.save(cart2);
         long productId = product1.getProductId();
-
 
         //Then
         assertNotEquals(0, productId); //spr. czy produkt dodano do bazy, baza jest numerowana od 1 więc nierówne
         assertEquals(2, carts.size());
+        assertEquals("Suit", product2.getProductName());
         assertEquals(cart1, product1.getCarts().get(0)); //utworzony obiekt i koszyk na liście to te same koszyki
     }
 
-    /*@Test
+    @Test
     public void addGroupToSetTest() {
         //Given
-        Set<Product> listGroupOne = new HashSet<>();
-        Group group1 = new Group();
-        Group group2 = new Group();
+        Set<Group> groupsOfProducts = new HashSet<>();
+        Group groupSport = new Group();
+        Group groupClothes = new Group();
+        groupsOfProducts.add(groupSport);
+        groupsOfProducts.add(groupClothes);
 
         Product product1 = new Product("Shoes", "Super comfortable running shoes", new BigDecimal("199.99"));
         Product product2 = new Product("Suit", "100% wool business suit", new BigDecimal(1199.00));
 
-        product1.getGroupsOfProduct().add(group1);
-        product1.getGroupsOfProduct().add(group2);
+        product1.getGroupsOfProduct().add(groupSport);
+        product1.getGroupsOfProduct().add(groupClothes);
 
-        Set<Group> groupsOfProducts = new HashSet<>();
+        //When
+        productRepository.save(product1);
+        long productId = product1.getProductId();
+
+        //Then
+        assertNotEquals(0, productId);
+        assertEquals(2, groupsOfProducts.size());
+        assertTrue(groupsOfProducts.contains(groupSport));
+    }
+
+    @Test
+    public void addProductToCartTest() {
+
+        //Given
+        Cart cart1 = new Cart();
+
+        Product product1 = new Product("Shoes", "Super comfortable running shoes", new BigDecimal("199.99"));
+        Product product2 = new Product("Suit", "100% wool business suit", new BigDecimal(1199.00));
+
+        //product1.getCarts().add(cart1);
+
+        cart1.getProducts().add(product1);
+        cart1.getProducts().add(product2);
+
+        //List<Cart> carts = product1.getCarts();
 
 
         //When
         productRepository.save(product1);
-        //cartRepository.save(cart1);
-        //cartRepository.save(cart2);
-        Optional<Product> savedProduct = Optional.ofNullable(productRepository.save(product1));
-        long productId = product1.getProductId();
+        productRepository.save(product2);
+        cartRepository.save(cart1);
+
+        //long productId = product1.getProductId();
 
 
         //Then
-        assertNotEquals(0, productId); //spr. czy produkt dodano do bazy, baza jest numerowana od 1 więc nierówne
-        assertEquals(2, groupsOfProducts.size());
-        //assertEquals(group1, product1.getGroupsOfProduct().get); //utworzony obiekt i koszyk na liście to te same koszyki
-
-
+        assertEquals(2, cart1.getProducts().size());
     }
-*/
 
 }
