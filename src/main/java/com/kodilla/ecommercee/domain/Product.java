@@ -1,8 +1,5 @@
 package com.kodilla.ecommercee.domain;
 
-
-import lombok.*;
-
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
@@ -11,30 +8,21 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.springframework.beans.factory.annotation.Autowired;
-
-import javax.persistence.*;
-import java.util.HashSet;
-import java.util.Set;
 
 @Entity
 @Table(name = "PRODUCTS")
-
 @NoArgsConstructor
-//@RequiredArgsConstructor
+@AllArgsConstructor
 @Getter
 @Setter
 public class Product {
 
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @NotNull
     private Long productId;
 
     @NotNull
@@ -46,24 +34,17 @@ public class Product {
     @NotNull
     private BigDecimal price;
 
-    /*@NotNull
-    private Cart cart;*/
+
+    @ManyToMany(mappedBy = "products")
+    private Set<Group> groupsOfProduct = new HashSet<>();
+
+    @ManyToMany(mappedBy = "products")
+
+    private List<Cart> carts = new ArrayList<>();
 
     public Product(@NotNull String productName, @NotNull String productDescription, @NotNull BigDecimal price) {
         this.productName = productName;
         this.productDescription = productDescription;
         this.price = price;
-    }
-
-
-    @ManyToMany(mappedBy = "products")
-    private Set<Group> groupsOfProduct = new HashSet<>();
-
-
-    @ManyToMany(mappedBy = "products")
-    private List<Cart> carts = new ArrayList<>();
-
-    public List<Cart> getCarts() {
-        return carts;
     }
 }
