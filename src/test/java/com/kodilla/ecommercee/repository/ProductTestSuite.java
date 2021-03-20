@@ -126,7 +126,7 @@ public class ProductTestSuite {
         //When
         productRepository.save(product1);
         productRepository.save(product2);
-        cartRepository.save(cart2);
+        cartRepository.save(cart1);
         long productId = product1.getProductId();
         long product2Id = product2.getProductId();
         long cart1Id = cart1.getCartId();
