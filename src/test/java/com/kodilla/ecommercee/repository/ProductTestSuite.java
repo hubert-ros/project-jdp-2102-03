@@ -37,7 +37,7 @@ public class ProductTestSuite {
     private GroupRepository groupRepository;
 
     @Test
-    public void productTest() {
+    public void productAddingTest() {
 
         //Given
         Product product1 = new Product("Shoes", "Super comfortable running shoes", new BigDecimal(199.99));
@@ -55,18 +55,54 @@ public class ProductTestSuite {
         long productId = product1.getProductId();
         String product1Name = product1.getProductName();
 
+        product3.setProductName("Evening Dress");
+        productRepository.save(product3);
+        String newProduct3Name = product3.getProductName();
 
         //Then
         assertEquals(3, productList.size());
         assertEquals("Suit", productList.get(1).getProductName());
         assertEquals("Shoes", product1Name);
-        assertNotEquals(0, productId); //spr. czy produkt dodano do bazy, baza jest numerowana od 1 więc nierówne
+        assertEquals("Evening Dress", newProduct3Name);
+        assertNotEquals(0, productId);
 
         //Clean-up
         productRepository.delete(product1);
         productRepository.delete(product2);
-            }
+        productRepository.delete(product3);
+    }
 
+    @Test
+    public void productDeletingTest() {
+
+        //Given
+        Product product1 = new Product("Shoes", "Super comfortable running shoes", new BigDecimal(199.99));
+        Product product2 = new Product("Suit", "100% wool business suit", new BigDecimal(1199.00));
+        Product product3 = new Product("Dress", "Posh evening dress", new BigDecimal(799.00));
+
+
+        //When
+        productRepository.save(product1);
+        productRepository.save(product2);
+        productRepository.save(product3);
+
+        List<Product> productListBeforeDeletion = (List<Product>) productRepository.findAll();
+
+        long productId = product1.getProductId();
+        String product1Name = product1.getProductName();
+        productRepository.deleteById(productId);
+
+        List<Product> productListAfterDeletion = (List<Product>) productRepository.findAll();
+
+
+        //Then
+        assertEquals(3, productListBeforeDeletion.size());
+        assertEquals(2, productListAfterDeletion.size());
+
+        //Clean-up
+        productRepository.delete(product2);
+        productRepository.delete(product3);
+    }
 
     @Test
     public void addCartToListTest() {
@@ -134,21 +170,16 @@ public class ProductTestSuite {
         Product product1 = new Product("Shoes", "Super comfortable running shoes", new BigDecimal("199.99"));
         Product product2 = new Product("Suit", "100% wool business suit", new BigDecimal(1199.00));
 
-        //product1.getCarts().add(cart1);
 
         cart1.getProducts().add(product1);
         cart1.getProducts().add(product2);
 
-        //List<Cart> carts = product1.getCarts();
 
 
         //When
         productRepository.save(product1);
         productRepository.save(product2);
         cartRepository.save(cart1);
-
-        //long productId = product1.getProductId();
-
 
         //Then
         assertEquals(2, cart1.getProducts().size());
