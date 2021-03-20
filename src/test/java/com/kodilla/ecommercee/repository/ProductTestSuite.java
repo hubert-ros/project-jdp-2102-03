@@ -128,12 +128,15 @@ public class ProductTestSuite {
         productRepository.save(product2);
         cartRepository.save(cart2);
         long productId = product1.getProductId();
+        long product2Id = product2.getProductId();
+        long cart1Id = cart1.getCartId();
 
         //Then
         assertNotEquals(0, productId); //spr. czy produkt dodano do bazy, baza jest numerowana od 1 więc nierówne
         assertEquals(2, carts.size());
-        assertEquals("Suit", product2.getProductName());
-        assertEquals(cart1, product1.getCarts().get(0)); //utworzony obiekt i koszyk na liście to te same koszyki
+        assertEquals("Suit", productRepository.findById(product2Id).get().getProductName());
+        //assertTrue(cartRepository.findById(cart1Id).);
+        //assertEquals(cart1, product1.getCarts().get(0));
     }
 
     @Test
