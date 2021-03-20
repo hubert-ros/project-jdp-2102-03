@@ -7,15 +7,9 @@ import lombok.Getter;
 @Getter
 public class OrderDto {
 
-    public enum OrderStatus {
-        UNPAID,
-        PAID,
-        CANCELED
-    }
-
     private Long id;
     private Cart cart;
     private User user;
-    private OrderDto.OrderStatus status;
+    private OrderStatus status;
 
 }

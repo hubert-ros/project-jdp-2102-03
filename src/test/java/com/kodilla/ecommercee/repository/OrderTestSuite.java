@@ -2,6 +2,7 @@ package com.kodilla.ecommercee.repository;
 
 import com.kodilla.ecommercee.domain.Cart;
 import com.kodilla.ecommercee.domain.Order;
+import com.kodilla.ecommercee.domain.OrderStatus;
 import com.kodilla.ecommercee.domain.User;
 import org.junit.Assert;
 import org.junit.Test;
@@ -33,11 +34,11 @@ public class OrderTestSuite {
         //Given
         User user = new User("user1", "test@mail.com", "address1");
         Cart cart = new Cart();
-        Order order = new Order(Order.OrderStatus.PAID);
+        Order order = new Order(OrderStatus.PAID);
 
         order.setCart(cart);
         order.setUser(user);
-        order.setStatus(Order.OrderStatus.UNPAID);
+        order.setStatus(OrderStatus.UNPAID);
 
         user.getOrders().add(order);
         cart.setOrder(order);
@@ -59,8 +60,8 @@ public class OrderTestSuite {
         User user = new User("user1", "test@mail.com", "address1");
         Cart cart1 = new Cart();
         Cart cart2 = new Cart();
-        Order order1 = new Order(Order.OrderStatus.UNPAID);
-        Order order2 = new Order(Order.OrderStatus.CANCELED);
+        Order order1 = new Order(OrderStatus.UNPAID);
+        Order order2 = new Order(OrderStatus.CANCELED);
 
         order1.setCart(cart1);
         order1.setUser(user);
@@ -93,8 +94,8 @@ public class OrderTestSuite {
         User user = new User("user1", "test@mail.com", "address1");
         Cart cart1 = new Cart();
         Cart cart2 = new Cart();
-        Order order1 = new Order(Order.OrderStatus.UNPAID);
-        Order order2 = new Order(Order.OrderStatus.CANCELED);
+        Order order1 = new Order(OrderStatus.UNPAID);
+        Order order2 = new Order(OrderStatus.CANCELED);
 
         order1.setCart(cart1);
         order1.setUser(user);

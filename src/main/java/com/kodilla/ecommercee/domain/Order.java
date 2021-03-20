@@ -12,12 +12,6 @@ import javax.persistence.*;
 @Setter
 public class Order {
 
-    public enum OrderStatus {
-        UNPAID,
-        PAID,
-        CANCELED
-    }
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "order_id")
