@@ -25,7 +25,7 @@ public class OrderController {
     }
 
     @PostMapping(value = "createOrder")
-    public OrderDto createOrder(long cardId, long userId) throws CartNotFoundException, UserNotFoundException {
+    public OrderDto createOrder(@RequestParam long cardId, long userId) throws CartNotFoundException, UserNotFoundException {
         Cart cart = orderService.getCart(cardId).orElseThrow(CartNotFoundException::new);
         User user = orderService.getUser(userId).orElseThrow(UserNotFoundException::new);
         Order order = new Order(OrderStatus.UNPAID);
@@ -36,7 +36,7 @@ public class OrderController {
     }
 
     @GetMapping(value = "getOrder")
-    public OrderDto getOrder(Long id) throws OrderNotFoundException {
+    public OrderDto getOrder(@RequestParam Long id) throws OrderNotFoundException {
         return orderMapper.mapToOrderDto(
                 orderService.getOrder(id).orElseThrow(OrderNotFoundException::new));
     }
@@ -49,7 +49,7 @@ public class OrderController {
     }
 
     @DeleteMapping(value = "deleteOrder")
-    public void deleteOrder(Long orderId) throws OrderNotFoundException {
+    public void deleteOrder(@RequestParam Long orderId) throws OrderNotFoundException {
         orderService.getOrder(orderId).orElseThrow(OrderNotFoundException::new);
         orderService.deleteOrder(orderId);
     }
