@@ -1,4 +1,5 @@
 package com.kodilla.ecommercee.domain;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
@@ -38,8 +39,7 @@ public class Product {
     @ManyToMany(mappedBy = "products")
     private List<Cart> carts = new ArrayList<>();
 
-    public Product(@NotNull String productName,
-                   @NotNull String productDescription, @NotNull BigDecimal price) {
+    public Product(@NotNull String productName, @NotNull String productDescription, @NotNull BigDecimal price) {
         this.productName = productName;
         this.productDescription = productDescription;
         this.price = price;

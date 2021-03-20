@@ -37,7 +37,8 @@ public class User {
     private boolean blocked = false;
 
     @OneToMany(mappedBy = "user",
+
             fetch = FetchType.EAGER)
     private Set<Order> orders = new HashSet<>();
-
+  
 }
