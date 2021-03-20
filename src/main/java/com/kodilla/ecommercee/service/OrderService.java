@@ -2,6 +2,7 @@ package com.kodilla.ecommercee.service;
 
 import com.kodilla.ecommercee.domain.Cart;
 import com.kodilla.ecommercee.domain.Order;
+import com.kodilla.ecommercee.domain.OrderStatus;
 import com.kodilla.ecommercee.domain.User;
 import com.kodilla.ecommercee.repository.CartRepository;
 import com.kodilla.ecommercee.repository.OrderRepository;
@@ -29,6 +30,13 @@ public class OrderService {
     }
 
     public Order saveOrder(final Order order) {
+        return orderRepository.save(order);
+    }
+
+    public Order createOrder(Cart cart, User user) {
+        Order order = new Order(OrderStatus.UNPAID);
+        order.setCart(cart);
+        order.setUser(user);
         return orderRepository.save(order);
     }
 

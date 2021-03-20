@@ -1,6 +1,9 @@
 package com.kodilla.ecommercee.controller;
 
 import com.kodilla.ecommercee.domain.*;
+import com.kodilla.ecommercee.exception.CartNotFoundException;
+import com.kodilla.ecommercee.exception.OrderNotFoundException;
+import com.kodilla.ecommercee.exception.UserNotFoundException;
 import com.kodilla.ecommercee.mapper.OrderMapper;
 import com.kodilla.ecommercee.service.OrderService;
 import lombok.AllArgsConstructor;
@@ -28,11 +31,8 @@ public class OrderController {
     public OrderDto createOrder(@RequestParam long cardId, long userId) throws CartNotFoundException, UserNotFoundException {
         Cart cart = orderService.getCart(cardId).orElseThrow(CartNotFoundException::new);
         User user = orderService.getUser(userId).orElseThrow(UserNotFoundException::new);
-        Order order = new Order(OrderStatus.UNPAID);
-        order.setCart(cart);
-        order.setUser(user);
-        Order savedOrder = orderService.saveOrder(order);
-        return orderMapper.mapToOrderDto(savedOrder);
+        Order createdOrder = orderService.createOrder(cart, user);
+        return orderMapper.mapToOrderDto(createdOrder);
     }
 
     @GetMapping(value = "getOrder")
