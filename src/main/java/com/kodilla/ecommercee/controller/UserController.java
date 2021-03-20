@@ -1,27 +1,38 @@
 package com.kodilla.ecommercee.controller;
 
-import com.kodilla.ecommercee.domain.GenericEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import com.kodilla.ecommercee.domain.User;
+import com.kodilla.ecommercee.domain.UserDto;
+import com.kodilla.ecommercee.mapper.UserMapper;
+import com.kodilla.ecommercee.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/v1/user")
 public class UserController {
 
+    @Autowired
+    private UserService userService;
+
+    @Autowired
+    private UserMapper userMapper;
+
     @PostMapping(value = "createUser")
-    public GenericEntity createUser() {
-        return new GenericEntity("user_1");
+    public UserDto createUser(@RequestParam String username, @RequestParam String eMail, @RequestParam String address) {
+
+        User user = new User(username, eMail, address);
+        return userMapper.mapToUserDto(userService.saveUser(user));
     }
 
     @PutMapping(value = "blockUser")
-    public GenericEntity blockUser(Long userId) {
-        return new GenericEntity("user_blocked");
+    public UserDto blockUser(@RequestParam Long userId) {
+
+        return userMapper.mapToUserDto(userService.blockUser(userId));
     }
 
     @PostMapping(value = "createUserKey")
-    public String createUserKey(String userName, String userKey) {
-        return "user_key";
+    public String createUserKey(@RequestParam Long userId) {
+
+        return userService.createUserKey(userId);
     }
 }

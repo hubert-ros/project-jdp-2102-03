@@ -12,6 +12,7 @@ import java.util.Set;
 @Table(name = "USERS")
 @NoArgsConstructor
 @RequiredArgsConstructor
+@AllArgsConstructor
 @Getter
 @Setter
 public class User {
@@ -33,12 +34,11 @@ public class User {
     @NonNull
     private String address;
 
-    @NotNull
     private boolean blocked = false;
 
     @OneToMany(mappedBy = "user",
 
             fetch = FetchType.EAGER)
     private Set<Order> orders = new HashSet<>();
-  
+
 }
