@@ -37,6 +37,10 @@ public class Cart {
 
         @Column(name = "VALUE")
         private BigDecimal value;
+
+        public Cart(BigDecimal value) {
+                this.value = value;
+        }
 }
 
 
