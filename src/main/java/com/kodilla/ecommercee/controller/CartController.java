@@ -5,7 +5,7 @@ import com.kodilla.ecommercee.exception.ResourceNotExistException;
 import com.kodilla.ecommercee.mapper.CartMapper;
 import com.kodilla.ecommercee.mapper.ProductMapper;
 import com.kodilla.ecommercee.service.CartService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,18 +14,12 @@ import java.util.List;
 @RestController
 @RequestMapping("/v1/cart")
 @CrossOrigin(origins = "*")
+@RequiredArgsConstructor
 public class CartController {
 
     private final CartService cartService;
     private final CartMapper cartMapper;
     private final ProductMapper productMapper;
-
-    @Autowired
-    public CartController(final CartService cartService, final CartMapper cartMapper, final ProductMapper productMapper) {
-        this.cartService = cartService;
-        this.cartMapper = cartMapper;
-        this.productMapper = productMapper;
-    }
 
     @PostMapping(value = "createCart")
     public CartDto createCart() {
@@ -62,5 +56,4 @@ public class CartController {
     public void deleteCart(@RequestParam long cartId) throws ResourceNotExistException {
         cartService.deleteCart(cartId);
     }
-
 }

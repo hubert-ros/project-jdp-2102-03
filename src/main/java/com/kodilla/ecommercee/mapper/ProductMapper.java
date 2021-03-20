@@ -11,9 +11,7 @@ import java.util.stream.Collectors;
 public class ProductMapper {
 
     public Product mapToProduct(final ProductDto productDto) {
-        return new Product(
-
-        );
+        return new Product();
     }
 
     public ProductDto mapToProductDto(final Product product) {
