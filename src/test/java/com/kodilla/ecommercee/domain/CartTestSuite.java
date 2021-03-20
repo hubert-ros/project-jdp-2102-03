@@ -31,9 +31,9 @@ public class CartTestSuite {
         long cartId = cart.getCartId();
 
         //When
-        Optional<Cart> savedCart = cartRepository.findById(cartId);
-        Cart cart1 = savedCart.orElse(new Cart(new BigDecimal("0")));
-        List<Product> products = cart1.getProducts();
+        Optional<Cart> optionalCart = cartRepository.findById(cartId);
+        Cart savedCart = optionalCart.orElse(new Cart(new BigDecimal("0")));
+        List<Product> products = savedCart.getProducts();
 
         //Then
         BigDecimal value = new BigDecimal("0");
@@ -59,9 +59,9 @@ public class CartTestSuite {
         long cartId = cart.getCartId();
 
         //When
-        Optional<Cart> savedCart = cartRepository.findById(cartId);
-        Cart cart1 = savedCart.orElse(new Cart(new BigDecimal("0")));
-        List<Product> products = cart1.getProducts();
+        Optional<Cart> optionalCart = cartRepository.findById(cartId);
+        Cart savedCart = optionalCart.orElse(new Cart(new BigDecimal("0")));
+        List<Product> products = savedCart.getProducts();
 
         //Then
         assertNotEquals(0, cartId);
@@ -89,9 +89,9 @@ public class CartTestSuite {
         long cartId = cart.getCartId();
 
         //When
-        Optional<Cart> savedCart = cartRepository.findById(cartId);
-        Cart cart1 = savedCart.orElse(new Cart(new BigDecimal("0")));
-        List<Product> products = cart1.getProducts();
+        Optional<Cart> optionalCart = cartRepository.findById(cartId);
+        Cart savedCart = optionalCart.orElse(new Cart(new BigDecimal("0")));
+        List<Product> products = savedCart.getProducts();
 
         //Then
         assertNotEquals(0, cartId);
@@ -119,9 +119,9 @@ public class CartTestSuite {
         long cartId = cart.getCartId();
 
         //When
-        Optional<Cart> savedCart = cartRepository.findById(cartId);
-        Cart cart1 = savedCart.orElse(new Cart(new BigDecimal("0")));
-        List<Product> products = cart1.getProducts();
+        Optional<Cart> optionalCart = cartRepository.findById(cartId);
+        Cart savedCart = optionalCart.orElse(new Cart(new BigDecimal("0")));
+        List<Product> products = savedCart.getProducts();
 
         //Then
         assertNotEquals(0, cartId);
@@ -154,9 +154,9 @@ public class CartTestSuite {
         long cartId = cart.getCartId();
 
         //When
-        Optional<Cart> savedCart = cartRepository.findById(cartId);
-        Cart cart1 = savedCart.orElseGet(() -> new Cart(new BigDecimal("0")));
-        List<Product> productsInDatabase = cart1.getProducts();
+        Optional<Cart> optionalCart = cartRepository.findById(cartId);
+        Cart savedCart = optionalCart.orElseGet(() -> new Cart(new BigDecimal("0")));
+        List<Product> productsInDatabase = savedCart.getProducts();
         productsInDatabase.removeAll(products);
         cart.setValue(new BigDecimal("0"));
 
@@ -165,6 +165,7 @@ public class CartTestSuite {
 
         assertNotEquals(0, cartId);
         assertTrue(products.isEmpty());
+        assertEquals(0, productsInDatabase.size());
         assertEquals(value, cart.getValue());
     }
 
@@ -192,9 +193,9 @@ public class CartTestSuite {
         long cartId = cart.getCartId();
 
         //When
-        Optional<Cart> savedCart = cartRepository.findById(cartId);
-        Cart cart1 = savedCart.orElseThrow(() -> new ResourceNotExistException("The cart does not exist in the database."));
-        List<Product> products = cart1.getProducts();
+        Optional<Cart> optionalCart = cartRepository.findById(cartId);
+        Cart savedCart = optionalCart.orElseThrow(() -> new ResourceNotExistException("The cart does not exist in the database."));
+        List<Product> products = savedCart.getProducts();
         products.remove(product1);
         int cartSize = products.size();
 
