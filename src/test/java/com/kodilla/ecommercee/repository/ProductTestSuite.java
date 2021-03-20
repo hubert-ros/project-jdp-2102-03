@@ -36,6 +36,37 @@ public class ProductTestSuite {
     @Autowired
     private GroupRepository groupRepository;
 
+    @Test
+    public void productTest() {
+
+        //Given
+        Product product1 = new Product("Shoes", "Super comfortable running shoes", new BigDecimal(199.99));
+        Product product2 = new Product("Suit", "100% wool business suit", new BigDecimal(1199.00));
+        Product product3 = new Product("Dress", "Posh evening dress", new BigDecimal(799.00));
+
+
+        //When
+        productRepository.save(product1);
+        productRepository.save(product2);
+        productRepository.save(product3);
+
+        List<Product> productList = (List<Product>) productRepository.findAll();
+
+        long productId = product1.getProductId();
+        String product1Name = product1.getProductName();
+
+
+        //Then
+        assertEquals(3, productList.size());
+        assertEquals("Suit", productList.get(1).getProductName());
+        assertEquals("Shoes", product1Name);
+        assertNotEquals(0, productId); //spr. czy produkt dodano do bazy, baza jest numerowana od 1 więc nierówne
+
+        //Clean-up
+        productRepository.delete(product1);
+        productRepository.delete(product2);
+            }
+
 
     @Test
     public void addCartToListTest() {
