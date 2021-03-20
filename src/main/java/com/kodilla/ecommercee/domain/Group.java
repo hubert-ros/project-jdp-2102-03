@@ -35,4 +35,8 @@ public class Group {
         this.name = name;
         this.products = products;
     }
+
+    public Group(String name) {
+        this.name = name;
+    }
 }
