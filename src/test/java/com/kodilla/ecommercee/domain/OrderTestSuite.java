@@ -121,7 +121,6 @@ public class OrderTestSuite {
 
         List<Order> orders = orderRepository.findAll();
 
-
         //Then
         Assert.assertEquals(1, orders.size());
     }
