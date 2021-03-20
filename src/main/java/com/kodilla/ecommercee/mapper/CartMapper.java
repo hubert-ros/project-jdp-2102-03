@@ -27,5 +27,4 @@ public class CartMapper {
                 .map(this::mapToCartDTO)
                 .collect(Collectors.toList());
     }
-
 }

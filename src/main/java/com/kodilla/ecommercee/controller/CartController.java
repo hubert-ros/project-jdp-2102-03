@@ -62,5 +62,4 @@ public class CartController {
     public void deleteCart(@RequestParam long cartId) throws ResourceNotExistException {
         cartService.deleteCart(cartId);
     }
-
 }

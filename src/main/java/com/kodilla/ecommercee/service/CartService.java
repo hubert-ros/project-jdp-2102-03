@@ -34,8 +34,15 @@ public class CartService {
     public List<Product> addProductToCart(long cartId, Product product) throws ResourceNotExistException {
         Optional<Cart> optionalCart =  cartRepository.findByCartId(cartId);
         Cart findCart = optionalCart.orElseThrow(() -> new ResourceNotExistException("Cart not exists"));
+
         List<Product> products = findCart.getProducts();
         products.add(product);
+
+        BigDecimal cartValue = products.stream()
+                .map(Product::getPrice)
+                .reduce(BigDecimal.ZERO, BigDecimal::add);
+        findCart.setValue(cartValue);
+
         cartRepository.save(findCart);
         return products;
     }
