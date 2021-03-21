@@ -11,9 +11,12 @@ import java.util.Optional;
 @Repository
 @Transactional
 public interface UserRepository extends CrudRepository<User, Long> {
-    Optional<User> findByUserId(Long id);
-    User findByUserName(String userName);
+    @Override
+    Optional<User> findById(Long id);
+
     @Override
     List<User> findAll();
+
+    Optional<User> findByUserName(String userName);
 }
  
