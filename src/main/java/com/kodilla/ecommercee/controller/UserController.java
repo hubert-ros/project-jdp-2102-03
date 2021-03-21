@@ -2,6 +2,7 @@ package com.kodilla.ecommercee.controller;
 
 import com.kodilla.ecommercee.domain.User;
 import com.kodilla.ecommercee.domain.UserDto;
+import com.kodilla.ecommercee.exception.UserNotFoundException;
 import com.kodilla.ecommercee.mapper.UserMapper;
 import com.kodilla.ecommercee.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,12 +28,21 @@ public class UserController {
     @PutMapping(value = "blockUser")
     public UserDto blockUser(@RequestParam Long userId) {
 
-        return userMapper.mapToUserDto(userService.blockUser(userId));
+        try {
+            return userMapper.mapToUserDto(userService.blockUser(userId));
+        } catch(UserNotFoundException e) {
+            return e.getNullUser();
+        }
+
     }
 
     @PostMapping(value = "createUserKey")
     public String createUserKey(@RequestParam Long userId) {
 
-        return userService.createUserKey(userId);
+        try {
+            return userService.createUserKey(userId);
+        } catch(UserNotFoundException e) {
+            return e.getMessage();
+        }
     }
 }
