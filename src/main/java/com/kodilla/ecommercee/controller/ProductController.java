@@ -43,9 +43,12 @@ public class ProductController {
 
     @PutMapping(value = "updateProduct")
     public ProductDto updateProduct(@RequestBody ProductDto productDto) {
-        Product product = productMapper.mapToProduct(productDto);
-        Product saveProduct = productService.saveProduct(product);
-        return productMapper.mapToProductDto(saveProduct);
+        Product product = productService.findProductById(productDto.getProductId());
+        product.setProductName(productDto.getProductName());
+        product.setProductDescription(productDto.getProductDescription());
+        product.setPrice(productDto.getPrice());
+        productService.saveProduct(product);
+        return productMapper.mapToProductDto(product);
     }
 
     @DeleteMapping(value = "deleteProduct")

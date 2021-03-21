@@ -40,9 +40,7 @@ public class Product {
     @ManyToMany(mappedBy = "products")
     private List<Cart> carts = new ArrayList<>();
 
-    public Product(Long productId, @NotNull String productName,
-                   @NotNull String productDescription, @NotNull BigDecimal price) {
-        this.productId = productId;
+    public Product(@NotNull String productName, @NotNull String productDescription, @NotNull BigDecimal price) {
         this.productName = productName;
         this.productDescription = productDescription;
         this.price = price;

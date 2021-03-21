@@ -14,4 +14,10 @@ public class ProductDto {
     private String productName;
     private String productDescription;
     private BigDecimal price;
+
+    public ProductDto(String productName, String productDescription, BigDecimal price) {
+        this.productName = productName;
+        this.productDescription = productDescription;
+        this.price = price;
+    }
 }
