@@ -22,19 +22,11 @@ import static org.junit.Assert.*;
 public class ProductTestSuite {
 
     @Autowired
-    private OrderRepository orderRepository;
-
-    @Autowired
-    private UserRepository userRepository;
-
-    @Autowired
     private CartRepository cartRepository;
 
     @Autowired
     private ProductRepository productRepository;
 
-    @Autowired
-    private GroupRepository groupRepository;
 
     @Test
     public void productAddingTest() {
@@ -50,9 +42,9 @@ public class ProductTestSuite {
         productRepository.save(product2);
         productRepository.save(product3);
 
-        List<Product> productList = (List<Product>) productRepository.findAll();
 
         long productId = product1.getProductId();
+        long product2Id = product2.getProductId();
         String product1Name = product1.getProductName();
 
         product3.setProductName("Evening Dress");
@@ -60,10 +52,8 @@ public class ProductTestSuite {
         String newProduct3Name = product3.getProductName();
 
         //Then
-        assertEquals(3, productList.size());
-        assertEquals("Suit", productList.get(1).getProductName());
-        assertEquals("Shoes", product1Name);
-        assertEquals("Evening Dress", newProduct3Name);
+        assertEquals(3, productRepository.findAll().size());
+        assertEquals("Suit", productRepository.findByProductId(product2Id).getProductName());
         assertNotEquals(0, productId);
 
         //Clean-up
@@ -86,13 +76,13 @@ public class ProductTestSuite {
         productRepository.save(product2);
         productRepository.save(product3);
 
-        List<Product> productListBeforeDeletion = (List<Product>) productRepository.findAll();
+        List<Product> productListBeforeDeletion = productRepository.findAll();
 
         long productId = product1.getProductId();
         String product1Name = product1.getProductName();
         productRepository.deleteById(productId);
 
-        List<Product> productListAfterDeletion = (List<Product>) productRepository.findAll();
+        List<Product> productListAfterDeletion = productRepository.findAll();
 
 
         //Then
@@ -121,18 +111,15 @@ public class ProductTestSuite {
         cart2.getProducts().add(product1);
         cart2.getProducts().add(product2);
 
-        List<Cart> carts = product1.getCarts();
-
         //When
         productRepository.save(product1);
         productRepository.save(product2);
         cartRepository.save(cart1);
-        long productId = product1.getProductId();
-        long product2Id = product2.getProductId();
-        long cart1Id = cart1.getCartId();
+        cartRepository.save(cart2);
 
         //Then
-        assertEquals("Suit", productRepository.findById(product2Id).get().getProductName());
+        assertEquals(2, cartRepository.findAll().size());
+        assertFalse(cartRepository.findAll().isEmpty());
     }
 
 
