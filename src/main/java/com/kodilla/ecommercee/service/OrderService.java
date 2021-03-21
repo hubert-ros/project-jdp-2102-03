@@ -4,6 +4,8 @@ import com.kodilla.ecommercee.domain.Cart;
 import com.kodilla.ecommercee.domain.Order;
 import com.kodilla.ecommercee.domain.OrderStatus;
 import com.kodilla.ecommercee.domain.User;
+import com.kodilla.ecommercee.exception.CartNotFoundException;
+import com.kodilla.ecommercee.exception.UserNotFoundException;
 import com.kodilla.ecommercee.repository.CartRepository;
 import com.kodilla.ecommercee.repository.OrderRepository;
 import com.kodilla.ecommercee.repository.UserRepository;
@@ -33,7 +35,9 @@ public class OrderService {
         return orderRepository.save(order);
     }
 
-    public Order createOrder(Cart cart, User user) {
+    public Order createOrder(long cartId, long userId) throws CartNotFoundException, UserNotFoundException {
+        Cart cart = getCart(cartId).orElseThrow(CartNotFoundException::new);
+        User user = getUser(userId).orElseThrow(UserNotFoundException::new);
         Order order = new Order(OrderStatus.UNPAID);
         order.setCart(cart);
         order.setUser(user);
@@ -48,11 +52,11 @@ public class OrderService {
         return orderRepository.findById(id);
     }
 
-    public Optional<Cart> getCart(final Long id) {
+    private Optional<Cart> getCart(final Long id) {
         return cartRepository.findById(id);
     }
 
-    public Optional<User> getUser(final Long id) {
+    private Optional<User> getUser(final Long id) {
         return userRepository.findById(id);
     }
 

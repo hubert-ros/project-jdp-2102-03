@@ -28,10 +28,8 @@ public class OrderController {
     }
 
     @PostMapping(value = "createOrder")
-    public OrderDto createOrder(@RequestParam long cardId, long userId) throws CartNotFoundException, UserNotFoundException {
-        Cart cart = orderService.getCart(cardId).orElseThrow(CartNotFoundException::new);
-        User user = orderService.getUser(userId).orElseThrow(UserNotFoundException::new);
-        Order createdOrder = orderService.createOrder(cart, user);
+    public OrderDto createOrder(@RequestParam long cartId, long userId) throws CartNotFoundException, UserNotFoundException {
+        Order createdOrder = orderService.createOrder(cartId, userId);
         return orderMapper.mapToOrderDto(createdOrder);
     }
 
