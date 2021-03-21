@@ -15,7 +15,8 @@ public class ProductMapper {
     }
 
     public ProductDto mapToProductDto(final Product product) {
-        return new ProductDto();
+        return new ProductDto(
+        );
     }
 
     public List<ProductDto> mapToProductDtoList(final List<Product> products) {

@@ -24,14 +24,14 @@ public class Group {
     private String name;
 
     @ManyToMany(
-            cascade = {CascadeType.PERSIST})
+            cascade = {CascadeType.MERGE, CascadeType.PERSIST})
     @JoinTable(
             name = "PRODUCT_GROUP",
             joinColumns = @JoinColumn(name = "GROUP_ID"),
             inverseJoinColumns = @JoinColumn(name = "PRODUCT_ID"))
     private Set<Product> products  = new HashSet<>();
 
-    public Group(String name, Set<Product> products) {
+    public Group(@NotNull String name, Set<Product> products) {
         this.name = name;
         this.products = products;
     }

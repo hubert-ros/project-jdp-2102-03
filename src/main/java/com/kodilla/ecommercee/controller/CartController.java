@@ -39,10 +39,9 @@ public class CartController {
         return productMapper.mapToProductDtoList(products);
     }
 
-    @PutMapping(value = "addProduct", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public List<ProductDto> addProductToCart(@RequestParam long cartId, @RequestBody ProductDto productDto) throws ResourceNotExistException{
-        Product addedProduct = productMapper.mapToProduct(productDto);
-        List<Product> products = cartService.addProductToCart(cartId, addedProduct);
+    @PutMapping(value = "addProduct")
+    public List<ProductDto> addProductToCart(@RequestParam long cartId, @RequestParam long productId) throws ResourceNotExistException{
+        List<Product> products = cartService.addProductToCart(cartId, productId);
         return productMapper.mapToProductDtoList(products);
     }
 

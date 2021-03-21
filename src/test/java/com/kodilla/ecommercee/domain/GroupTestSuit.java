@@ -108,4 +108,22 @@ public class GroupTestSuit {
         //CleanUp
         groupRepository.deleteById(idGroupTwo);
     }
+
+    @Test
+    public void testUpdateGroup() {
+        //Given
+        Set<Product> listGroupOne = new HashSet<>();
+        Group groupOne = new Group("GroupOneTest", listGroupOne);
+
+        //When
+        groupRepository.save(groupOne);
+        long id = groupOne.getGroupId();
+        groupOne.setName("UpdateGroupOneTest");
+
+        //Then
+        assertEquals("UpdateGroupOneTest", groupOne.getName());
+
+        //CleanUp
+        groupRepository.deleteById(id);
+    }
 }
