@@ -1,6 +1,6 @@
 package com.kodilla.ecommercee.domain;
 
-import com.kodilla.ecommercee.exception.ResourceNotExistException;
+import com.kodilla.ecommercee.exception.ResourceNotFoundException;
 import com.kodilla.ecommercee.repository.CartRepository;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -170,7 +170,7 @@ public class CartTestSuite {
     }
 
     @Test
-    public void shouldRemoveOneProductFromCart() throws ResourceNotExistException {
+    public void shouldRemoveOneProductFromCart() throws ResourceNotFoundException {
         //Given
         Group group = new Group("Toys");
         Product product = new Product("blocks", "wooden blocks", new BigDecimal("4.50"));
@@ -194,7 +194,7 @@ public class CartTestSuite {
 
         //When
         Optional<Cart> optionalCart = cartRepository.findById(cartId);
-        Cart savedCart = optionalCart.orElseThrow(() -> new ResourceNotExistException("The cart does not exist in the database."));
+        Cart savedCart = optionalCart.orElseThrow(() -> new ResourceNotFoundException("The cart does not exist in the database."));
         List<Product> products = savedCart.getProducts();
         products.remove(product1);
         int cartSize = products.size();
