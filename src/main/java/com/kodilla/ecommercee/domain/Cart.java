@@ -34,9 +34,8 @@ public class Cart {
         @Column(name = "VALUE")
         private BigDecimal value;
 
-        public Cart(Long cartId, List<Product> products, BigDecimal value) {
+        public Cart(Long cartId, BigDecimal value) {
                 this.cartId = cartId;
-                this.products = products;
                 this.value = value;
         }
 
