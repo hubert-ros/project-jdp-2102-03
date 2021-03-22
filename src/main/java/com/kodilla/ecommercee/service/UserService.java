@@ -28,12 +28,12 @@ public class UserService {
         return userRepository.save(user);
     }
 
-    public String createUserKey(final String userName, final String password) throws UserNotFoundException {
+    public String createUserKey(final String userName, final String eMail) throws UserNotFoundException {
 
         long timeStamp = System.currentTimeMillis();
         User user = userRepository.findByUserName(userName).orElseThrow(UserNotFoundException::new);
 
-        if (password.equals(user.getEMail())) {
+        if (eMail.equals(user.getEMail())) {
 
             Random rand = new Random();
             return user.getUserId() + "x" + user.hashCode() + rand.nextInt(999) + rand.nextInt(999) + "xxx" + timeStamp;
