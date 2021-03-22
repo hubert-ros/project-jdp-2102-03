@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.context.annotation.Lazy;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
@@ -34,8 +35,9 @@ public class Cart {
         @Column(name = "VALUE")
         private BigDecimal value;
 
-        public Cart(Long cartId, BigDecimal value) {
+        public Cart(Long cartId, @Lazy Order order, BigDecimal value) {
                 this.cartId = cartId;
+                this.order = order;
                 this.value = value;
         }
 

@@ -1,6 +1,7 @@
 package com.kodilla.ecommercee.domain;
 
 import lombok.*;
+import org.springframework.context.annotation.Lazy;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -31,7 +32,7 @@ public class Group {
             inverseJoinColumns = @JoinColumn(name = "PRODUCT_ID"))
     private Set<Product> products  = new HashSet<>();
 
-    public Group(@NotNull String name, Set<Product> products) {
+    public Group(@NotNull String name, @Lazy Set<Product> products) {
         this.name = name;
         this.products = products;
     }
