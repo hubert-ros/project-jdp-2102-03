@@ -12,17 +12,18 @@ import java.util.Optional;
 @Transactional
 public interface ProductRepository extends CrudRepository<Product, Long> {
 
-
     List<Product> findByProductName(String name);
 
-    Product findByProductId(Long id);
+    Product findByProductName(String productName);
+
+    Product findByProductId(Long productId);
 
     @Override
     List<Product> findAll();
 
-
     @Override
     Product save(Product product);
 
-    //List<Product> save (List list);
+    @Override
+    void deleteById(Long productId);
 }
