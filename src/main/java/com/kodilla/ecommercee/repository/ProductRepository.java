@@ -7,6 +7,16 @@ import java.util.List;
 @Repository
 @Transactional
 public interface ProductRepository extends CrudRepository<Product, Long> {
-    List<Product> findByProductName(String name);
-    List<Product> findByProductId(Long id);
+    Product findByProductName(String productName);
+
+    Product findByProductId(Long productId);
+
+    @Override
+    List<Product> findAll();
+
+    @Override
+    Product save(Product product);
+
+    @Override
+    void deleteById(Long productId);
 }
