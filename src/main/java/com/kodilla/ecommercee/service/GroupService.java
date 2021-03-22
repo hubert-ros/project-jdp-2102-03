@@ -15,7 +15,10 @@ public class GroupService {
     private final GroupRepository groupRepository;
 
     public Group createGroup(Group group) {
-        return groupRepository.save(group);
+        Optional<Group> optionalGroup = groupRepository.findByName(group.getName()).stream()
+                .filter(n -> n.getName().equals(group.getName()))
+                .findAny();
+        return optionalGroup.orElseGet(() -> groupRepository.save(group));
     }
 
     public Group getGroup(long groupId) throws ResourceNotFoundException{
