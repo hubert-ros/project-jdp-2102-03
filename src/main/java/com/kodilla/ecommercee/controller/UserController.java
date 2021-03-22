@@ -5,11 +5,14 @@ import com.kodilla.ecommercee.domain.UserDto;
 import com.kodilla.ecommercee.exception.UserNotFoundException;
 import com.kodilla.ecommercee.mapper.UserMapper;
 import com.kodilla.ecommercee.service.UserService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/v1/user")
+@RequiredArgsConstructor
 public class UserController {
 
     @Autowired
@@ -18,31 +21,22 @@ public class UserController {
     @Autowired
     private UserMapper userMapper;
 
-    @PostMapping(value = "createUser")
-    public UserDto createUser(@RequestParam String username, @RequestParam String eMail, @RequestParam String address) {
+    @PostMapping(value = "createUser", consumes = MediaType.APPLICATION_JSON_VALUE)
+    public UserDto createUser(@RequestBody UserDto userDto) {
 
-        User user = new User(username, eMail, address);
+        User user = userMapper.mapToUser(userDto);
         return userMapper.mapToUserDto(userService.saveUser(user));
     }
 
     @PutMapping(value = "blockUser")
-    public UserDto blockUser(@RequestParam Long userId) {
+    public UserDto blockUser(@RequestParam Long userId) throws UserNotFoundException {
 
-        try {
             return userMapper.mapToUserDto(userService.blockUser(userId));
-        } catch(UserNotFoundException e) {
-            return e.getNullUser();
-        }
-
     }
 
     @PostMapping(value = "createUserKey")
-    public String createUserKey(@RequestParam Long userId) {
+    public String createUserKey(@RequestParam String userName, @RequestParam String eMail) throws UserNotFoundException {
 
-        try {
-            return userService.createUserKey(userId);
-        } catch(UserNotFoundException e) {
-            return e.getMessage();
-        }
+            return userService.createUserKey(userName, eMail);
     }
 }

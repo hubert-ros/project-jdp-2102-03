@@ -8,11 +8,6 @@ import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.sql.Timestamp;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Optional;
-import java.util.OptionalDouble;
 import java.util.Random;
 
 @AllArgsConstructor
@@ -33,12 +28,16 @@ public class UserService {
         return userRepository.save(user);
     }
 
-    public String createUserKey(final Long id) throws UserNotFoundException {
+    public String createUserKey(final String userName, final String password) throws UserNotFoundException {
 
-        User user = userRepository.findById(id).orElseThrow(UserNotFoundException::new);
-        String timeStamp = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date());
-        Random rand = new Random();
+        long timeStamp = System.currentTimeMillis();
+        User user = userRepository.findByUserName(userName).orElseThrow(UserNotFoundException::new);
 
-        return user.getUserId() + "x" + user.hashCode() + rand.nextInt(999) + rand.nextInt(999) + "xxx" + timeStamp;
+        if (password.equals(user.getEMail())) {
+
+            Random rand = new Random();
+            return user.getUserId() + "x" + user.hashCode() + rand.nextInt(999) + rand.nextInt(999) + "xxx" + timeStamp;
+        }
+        return "";
     }
 }
