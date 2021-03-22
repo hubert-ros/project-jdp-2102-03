@@ -10,12 +10,7 @@ import javax.persistence.*;
 @Getter
 @Setter
 public class Order {
-    public enum OrderStatus {
-        UNPAID,
-        PAID,
-        CANCELED
-    }
-
+  
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "order_id")
@@ -30,4 +25,5 @@ public class Order {
     @Enumerated(EnumType.STRING)
     @Column(name = "status")
     private OrderStatus status;
+  
 }
