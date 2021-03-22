@@ -35,10 +35,6 @@ public class Cart {
         @Column(name = "VALUE")
         private BigDecimal value;
 
-        public Order getOrder() {
-                return new Order();
-        }
-
         public Cart(Long cartId, @Lazy Order order, BigDecimal value) {
                 this.cartId = cartId;
                 this.order = order;

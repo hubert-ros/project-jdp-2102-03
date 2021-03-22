@@ -17,12 +17,12 @@ public class GroupMapper {
     }
 
     public GroupDto mapToGroupDto(final Group group) {
-        return new GroupDto((group.getGroupId()),
+        return new GroupDto(group.getGroupId(),
                 group.getName(),
                 group.getProducts());
     }
 
-    public List<GroupDto> mapToGroupDtoList(List<Group> groups) {
+    public List<GroupDto> mapToGroupDtoList(final List<Group> groups) {
         return groups.stream()
                 .map(this::mapToGroupDto)
                 .collect(Collectors.toList());
