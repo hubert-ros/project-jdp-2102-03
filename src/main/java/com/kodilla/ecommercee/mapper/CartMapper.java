@@ -10,11 +10,13 @@ public class CartMapper {
 
     public CartDto mapToCartDTO(final Cart cart) {
         return new CartDto(cart.getCartId(),
+                cart.getOrder(),
                 cart.getValue());
     }
 
     public Cart mapToCart(final CartDto cartDto) {
         return new Cart(cartDto.getCartId(),
+                cartDto.getOrder(),
                 cartDto.getValue());
     }
 
