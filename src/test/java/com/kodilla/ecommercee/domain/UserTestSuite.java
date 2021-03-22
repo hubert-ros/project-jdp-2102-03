@@ -123,7 +123,7 @@ public class UserTestSuite {
     public void shouldCreateRelationWithOrder() {
         //Given
         User user = new User("user 1", "user@mail.pl", "PL");
-        Order order = new Order(Order.OrderStatus.UNPAID);
+        Order order = new Order(OrderStatus.UNPAID);
         userRepository.save(user);
         orderRepository.save(order);
 
